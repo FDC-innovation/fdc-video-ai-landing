@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+:root {
+  --background: #080808;
+  --foreground: #F2F2F2;
+  --font-syne: "Syne", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --accent: #00FFD1;
+  --accent-glow: rgba(0, 255, 209, 0.15);
+  --surface: #111111;
+  --border: #1f1f1f;
+  --text-muted: #666666;
+  --danger: #FF4D4D;
+}
+
+@theme inline {
+  --color-background: #080808;
+  --color-foreground: #F2F2F2;
+  --font-syne: var(--font-syne);
+  --font-inter: var(--font-inter);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080808;
+  color: #F2F2F2;
+  font-family: var(--font-inter), Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Film grain overlay */
+.film-grain::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+@keyframes mesh-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -40px) scale(1.1); }
+  66% { transform: translate(-40px, 60px) scale(0.95); }
+}
+
+@keyframes mesh-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1.05); }
+  33% { transform: translate(-80px, 50px) scale(1); }
+  66% { transform: translate(50px, -60px) scale(1.1); }
+}
+
+@keyframes mesh-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(0.95); }
+  50% { transform: translate(40px, 40px) scale(1.05); }
+}
+
+.mesh-orb-1 { animation: mesh-drift-1 18s ease-in-out infinite; }
+.mesh-orb-2 { animation: mesh-drift-2 22s ease-in-out infinite; }
+.mesh-orb-3 { animation: mesh-drift-3 15s ease-in-out infinite; }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-inner { animation: marquee 20s linear infinite; }
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-gradient {
+  to { --angle: 360deg; }
+}
+
+.animated-border { animation: spin-gradient 4s linear infinite; }
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(0, 255, 209, 0.4); }
+  50% { box-shadow: 0 0 24px rgba(0, 255, 209, 0.8), 0 0 48px rgba(0, 255, 209, 0.3); }
+}
+
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+@keyframes scan {
+  0% { top: 0%; opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.scan-line { animation: scan 2.5s ease-in-out infinite; }
+
+@keyframes playhead-move {
+  0% { left: 8%; }
+  100% { left: 82%; }
+}
+
+.playhead { animation: playhead-move 4s ease-in-out infinite alternate; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink { animation: blink 1s step-end infinite; }
+
+@keyframes eq-1 { 0%,100%{height:30%} 50%{height:90%} }
+@keyframes eq-2 { 0%,100%{height:60%} 50%{height:30%} }
+@keyframes eq-3 { 0%,100%{height:45%} 50%{height:80%} }
+@keyframes eq-4 { 0%,100%{height:75%} 50%{height:40%} }
+@keyframes eq-5 { 0%,100%{height:50%} 50%{height:100%} }
+@keyframes eq-6 { 0%,100%{height:80%} 50%{height:20%} }
+@keyframes eq-7 { 0%,100%{height:35%} 50%{height:70%} }
+
+@keyframes upload-progress {
+  0% { width: 0%; }
+  60% { width: 85%; }
+  80% { width: 85%; }
+  100% { width: 100%; }
+}
+
+.upload-bar { animation: upload-progress 3s ease-in-out infinite; }
+
+@keyframes bounce-up {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes processing-step {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: #1f1f1f; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00FFD1; }
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #1f1f1f 20%, #1f1f1f 80%, transparent);
+}
