@@ -714,7 +714,7 @@ function HeroSection() {
           className="font-black leading-none mb-6"
           style={{
             fontFamily: "var(--font-syne)",
-            fontSize: "clamp(52px, 8vw, 96px)",
+            fontSize: "clamp(36px, 8vw, 96px)",
             color: "var(--fg)",
           }}
         >
@@ -2988,7 +2988,7 @@ function StatsBar() {
               className="font-black leading-none mb-2"
               style={{
                 fontFamily: "var(--font-syne)",
-                fontSize: "clamp(48px, 6vw, 72px)",
+                fontSize: "clamp(32px, 6vw, 72px)",
                 color: ACCENT,
               }}
             >
