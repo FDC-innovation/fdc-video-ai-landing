@@ -15,9 +15,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "FDC Studio — AI Video Editing Platform",
+  title: "Chalchitra — AI-Native Video & Podcast Studio",
   description:
-    "FDC turns raw footage into publish-ready content in minutes. No timeline. No complexity. Just results.",
+    "Chalchitra turns raw footage and podcast recordings into publish-ready content in minutes. No timeline. No complexity. Built for the next wave of global creators.",
 };
 
 export default function RootLayout({
