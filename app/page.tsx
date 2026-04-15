@@ -13,6 +13,16 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { VeedHero } from "../components/VeedHero";
+import { VeedHowItWorks } from "../components/VeedHowItWorks";
+import { VeedFeatures } from "../components/VeedFeatures";
+import { VeedMarquee } from "../components/VeedMarquee";
+import { VeedUseCases } from "../components/VeedUseCases";
+import { VeedTemplates } from "../components/VeedTemplates";
+import { VeedTestimonials } from "../components/VeedTestimonials";
+import { VeedContact } from "../components/VeedContact";
+import { VeedWaitlist } from "../components/VeedWaitlist";
+import { VeedFooter } from "../components/VeedFooter";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 import {
@@ -221,20 +231,16 @@ function Navbar() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       }}
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-        scrolled ? "backdrop-blur-xl border-b py-3" : "py-5"
-      }`}
-      style={
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 will-change-transform ${
         scrolled
-          ? {
-              background: "var(--nav-scrolled-bg)",
-              borderBottomColor: "var(--nav-border)",
-            }
-          : { background: "transparent" }
-      }
+          ? isDark
+            ? "bg-[#0A0A0A]/70 backdrop-blur-[24px] backdrop-saturate-[180%] border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-3"
+            : "bg-[#FFFFFF]/70 backdrop-blur-[24px] backdrop-saturate-[180%] border-b border-black/[0.04] shadow-[0_4px_30px_rgba(0,0,0,0.03)] py-3"
+          : "bg-transparent py-5 border-b border-transparent"
+      }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
@@ -554,8 +560,8 @@ function EditorMockup() {
               background: s.active
                 ? "rgba(0,255,209,0.1)"
                 : s.done
-                ? "rgba(255,255,255,0.04)"
-                : "rgba(255,255,255,0.02)",
+                  ? "rgba(255,255,255,0.04)"
+                  : "rgba(255,255,255,0.02)",
               border: s.active
                 ? `1px solid rgba(0,255,209,0.3)`
                 : `1px solid ${BORDER}`,
@@ -853,115 +859,6 @@ function TrustBar() {
             </span>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   VISION SECTION — replaces Pain Points
-───────────────────────────────────────────── */
-function VisionSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  const lines = [
-    { text: "The next 100 million creators", accent: false },
-    { text: "won't come from one city.", accent: false },
-    { text: "They'll come from Lagos, São Paulo,", accent: false },
-    { text: "Jakarta, Cape Town, Nairobi.", accent: false },
-  ];
-
-  const pills = [
-    { icon: <Globe size={13} />, label: "Any Language" },
-    { icon: <Mic size={13} />, label: "Any Format" },
-    { icon: <Headphones size={13} />, label: "Any Device" },
-    { icon: <Zap size={13} />, label: "Zero Learning Curve" },
-  ];
-
-  return (
-    <section
-      className="py-32 px-6 relative overflow-hidden"
-      style={{ background: "var(--bg)" }}
-    >
-      {/* Subtle background glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse 60% 50% at 50% 60%, rgba(0,255,209,0.04) 0%, transparent 70%)`,
-        }}
-      />
-
-      <div className="max-w-5xl mx-auto" ref={ref}>
-        {/* Big text statement */}
-        <div className="flex flex-col gap-1 mb-12">
-          {lines.map((line, i) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0, x: -40 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{
-                delay: i * 0.18,
-                duration: 0.8,
-                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-              }}
-              className="font-black"
-              style={{
-                fontFamily: "var(--font-syne)",
-                fontSize: "clamp(26px, 4vw, 60px)",
-                color: i < 2 ? "var(--fg-45)" : i === 2 ? "var(--fg-75)" : "var(--fg)",
-                lineHeight: 1.15,
-              }}
-            >
-              {line.text}
-            </motion.p>
-          ))}
-          <motion.p
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{
-              delay: 4 * 0.18,
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-            }}
-            className="font-black mt-2"
-            style={{
-              fontFamily: "var(--font-syne)",
-              fontSize: "clamp(26px, 4vw, 60px)",
-              color: ACCENT,
-              lineHeight: 1.15,
-            }}
-          >
-            Chalchitra is built for all of them.
-          </motion.p>
-        </div>
-
-        {/* Pills */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.0, duration: 0.7 }}
-          className="flex flex-wrap gap-3"
-        >
-          {pills.map((pill, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 1.1 + i * 0.08 }}
-              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
-              style={{
-                border: `1px solid rgba(0,255,209,0.15)`,
-                color: "#888",
-                background: "rgba(0,255,209,0.04)",
-                fontFamily: "var(--font-syne)",
-              }}
-            >
-              <span style={{ color: ACCENT }}>{pill.icon}</span>
-              {pill.label}
-            </motion.span>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
@@ -1791,274 +1688,7 @@ function HowItWorks() {
 /* ─────────────────────────────────────────────
    TEMPLATES
 ───────────────────────────────────────────── */
-function TemplatesSection() {
 
-  // Unsplash free images — curated per template category
-  // grad = fallback while image loads; tint = cinematic colour cast overlay
-  const templates = [
-    {
-      name: "Viral Short",
-      platform: "TikTok / Reels",
-      duration: "15-60 sec",
-      style: "Fast cuts, hooks",
-      grad: "from-pink-600 to-orange-500",
-      img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=512&h=320&fit=crop&q=85&auto=format",
-      tint: "rgba(236,72,153,0.18)",
-    },
-    {
-      name: "Podcast Highlight",
-      platform: "YouTube / Spotify",
-      duration: "60-90 sec",
-      style: "Best moments, captions",
-      grad: "from-violet-700 to-blue-600",
-      img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=512&h=320&fit=crop&q=85&auto=format",
-      tint: "rgba(124,58,237,0.18)",
-    },
-    {
-      name: "Full Episode Edit",
-      platform: "YouTube / Podcast",
-      duration: "30-90 min",
-      style: "Long-form polish",
-      grad: "from-blue-800 to-indigo-700",
-      img: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=512&h=320&fit=crop&q=85&auto=format",
-      tint: "rgba(37,99,235,0.18)",
-    },
-    {
-      name: "Product Drop",
-      platform: "Instagram",
-      duration: "30 sec",
-      style: "Luxury minimal",
-      grad: "from-yellow-900 to-yellow-600",
-      img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=512&h=320&fit=crop&q=85&auto=format",
-      tint: "rgba(202,138,4,0.22)",
-    },
-    {
-      name: "Fitness Reel",
-      platform: "TikTok",
-      duration: "30 sec",
-      style: "Beat sync",
-      grad: "from-orange-600 to-red-600",
-      img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=512&h=320&fit=crop&q=85&auto=format",
-      tint: "rgba(234,88,12,0.18)",
-    },
-    {
-      name: "Corporate Intro",
-      platform: "LinkedIn",
-      duration: "90 sec",
-      style: "Professional",
-      grad: "from-blue-900 to-teal-700",
-      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=512&h=320&fit=crop&q=85&auto=format",
-      tint: "rgba(14,165,233,0.14)",
-    },
-    {
-      name: "Tutorial",
-      platform: "YouTube",
-      duration: "3-10 min",
-      style: "Step by step",
-      grad: "from-green-700 to-teal-600",
-      img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=512&h=320&fit=crop&q=85&auto=format",
-      tint: "rgba(5,150,105,0.15)",
-    },
-    {
-      name: "Travel Vlog",
-      platform: "YouTube / Instagram",
-      duration: "2-5 min",
-      style: "Cinematic",
-      grad: "from-teal-600 to-blue-700",
-      img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=512&h=320&fit=crop&q=85&auto=format",
-      tint: "rgba(6,182,212,0.14)",
-    },
-    {
-      name: "Testimonial",
-      platform: "Ads / Web",
-      duration: "60 sec",
-      style: "Social proof",
-      grad: "from-gray-700 to-gray-500",
-      img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=512&h=320&fit=crop&q=85&auto=format",
-      tint: "rgba(107,114,128,0.14)",
-    },
-  ];
-
-  return (
-    <section
-      id="templates"
-      className="py-28 overflow-hidden"
-      style={{ background: "var(--bg-alt)" }}
-    >
-      <div className="max-w-6xl mx-auto px-6">
-        <div data-gsap-reveal className="text-center mb-14">
-          <p
-            className="text-sm font-semibold mb-3 tracking-widest uppercase"
-            style={{ color: ACCENT, fontFamily: "var(--font-syne)" }}
-          >
-            Templates
-          </p>
-          <h2
-            className="font-black mb-4"
-            style={{
-              fontFamily: "var(--font-syne)",
-              fontSize: "clamp(32px, 5vw, 52px)",
-              color: "var(--fg)",
-            }}
-          >
-            Pick a template. Drop your footage. Done.
-          </h2>
-          <p
-            className="text-lg"
-            style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-          >
-            60+ creator-ready templates. Drag to explore.
-          </p>
-        </div>
-      </div>
-
-      <div className="px-6 overflow-hidden">
-        <div>
-          <motion.div
-            drag="x"
-            dragConstraints={{ left: -((templates.length - 3) * 280), right: 0 }}
-            dragElastic={0.05}
-            className="flex gap-4 cursor-grab active:cursor-grabbing select-none"
-            style={{ width: "max-content" }}
-          >
-            {templates.map((t, i) => (
-              <motion.div
-                key={i}
-                data-gsap-template-card
-                whileHover={{ scale: 1.04 }}
-                className="relative flex-shrink-0 rounded-2xl border overflow-hidden flex flex-col"
-                style={{
-                  background: SURFACE,
-                  borderColor: BORDER,
-                  width: "256px",
-                  height: "360px",
-                }}
-              >
-                {/* Thumbnail */}
-                <div
-                  className={`h-40 bg-gradient-to-br ${t.grad} relative flex-shrink-0 overflow-hidden`}
-                >
-                  {/* Photo — gradient is the colour fallback while it loads */}
-                  <img
-                    src={t.img}
-                    alt={t.name}
-                    draggable={false}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).style.display =
-                        "none";
-                    }}
-                  />
-
-                  {/* Cinematic tint + bottom-fade overlay */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(
-                        to top,
-                        rgba(0,0,0,0.88) 0%,
-                        ${t.tint} 50%,
-                        rgba(0,0,0,0.22) 100%
-                      )`,
-                    }}
-                  />
-
-                  {/* Subtle film-grain texture overlay */}
-                  <div
-                    className="absolute inset-0 opacity-20 pointer-events-none"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-                      backgroundRepeat: "repeat",
-                      backgroundSize: "96px 96px",
-                    }}
-                  />
-
-                  {/* Hover play overlay */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{ background: "rgba(0,0,0,0.35)" }}
-                  >
-                    <motion.span
-                      initial={{ scale: 0.85 }}
-                      whileHover={{ scale: 1 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                      className="text-sm font-bold px-3 py-1.5 rounded-full"
-                      style={{
-                        background: ACCENT,
-                        color: "#080808",
-                        fontFamily: "var(--font-syne)",
-                        boxShadow: `0 0 20px rgba(0,255,209,0.5)`,
-                      }}
-                    >
-                      ▶ Preview
-                    </motion.span>
-                  </motion.div>
-
-                  <div className="absolute top-2 left-2">
-                    <span
-                      className="text-xs px-2 py-0.5 rounded-full font-medium"
-                      style={{
-                        background: "rgba(0,0,0,0.65)",
-                        color: "var(--fg)",
-                        fontFamily: "var(--font-syne)",
-                        backdropFilter: "blur(6px)",
-                      }}
-                    >
-                      {t.platform.split("/")[0].trim()}
-                    </span>
-                  </div>
-                  <div className="absolute top-2 right-2">
-                    <span
-                      className="text-xs px-2 py-0.5 rounded-full font-medium"
-                      style={{
-                        background: "rgba(0,0,0,0.65)",
-                        color: "#aaa",
-                        fontFamily: "var(--font-inter)",
-                        backdropFilter: "blur(6px)",
-                      }}
-                    >
-                      {t.duration}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-4 flex flex-col flex-1">
-                  <p
-                    className="font-bold text-base mb-1"
-                    style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-                  >
-                    {t.name}
-                  </p>
-                  <p
-                    className="text-xs mb-3"
-                    style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-                  >
-                    {t.style}
-                  </p>
-                  <div className="flex-1" />
-                  <button
-                    className="w-full py-2 rounded-full text-xs font-semibold cursor-pointer transition-all mt-2"
-                    style={{
-                      border: `1px solid rgba(0,255,209,0.25)`,
-                      color: ACCENT,
-                      background: "rgba(0,255,209,0.05)",
-                      fontFamily: "var(--font-syne)",
-                    }}
-                  >
-                    Use Template →
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ─────────────────────────────────────────────
    USE CASES
@@ -2123,20 +1753,20 @@ function UseCases() {
                   inView
                     ? clip.filler
                       ? {
-                          opacity: [0, 1, 1, 0],
-                          scaleX: [0, 1, 1, 0],
-                        }
+                        opacity: [0, 1, 1, 0],
+                        scaleX: [0, 1, 1, 0],
+                      }
                       : { opacity: 1, scaleX: 1 }
                     : {}
                 }
                 transition={
                   clip.filler
                     ? {
-                        delay: 0.4 + i * 0.08,
-                        duration: 2.5,
-                        repeat: Infinity,
-                        repeatDelay: 1.5,
-                      }
+                      delay: 0.4 + i * 0.08,
+                      duration: 2.5,
+                      repeat: Infinity,
+                      repeatDelay: 1.5,
+                    }
                     : { delay: 0.25 + i * 0.08, duration: 0.45 }
                 }
               />
@@ -2181,11 +1811,11 @@ function UseCases() {
               animate={
                 inView
                   ? {
-                      y: [0, -24 - i * 6],
-                      x: [(i - 2) * 8, (i - 2) * 16],
-                      opacity: [0, 1, 0],
-                      scale: [0, 1.8, 0],
-                    }
+                    y: [0, -24 - i * 6],
+                    x: [(i - 2) * 8, (i - 2) * 16],
+                    opacity: [0, 1, 0],
+                    scale: [0, 1.8, 0],
+                  }
                   : {}
               }
               transition={{
@@ -2950,62 +2580,6 @@ function UseCases() {
   );
 }
 
-/* ─────────────────────────────────────────────
-   STATS BAR
-   Reasoning: 6x is based on average 3-hour manual edit
-   vs ~30-min AI-assisted workflow for a 10-min video.
-   <5 min is realistic processing time for short-form content.
-───────────────────────────────────────────── */
-function StatsBar() {
-  const stats = [
-    { value: 60, suffix: "+", prefix: "", label: "Templates Available" },
-    { value: 98, suffix: "%", prefix: "", label: "Transcription Accuracy" },
-    { value: 5, suffix: " min", prefix: "<", label: "Avg. Processing Time" },
-    { value: 6, suffix: "x", prefix: "", label: "Faster Than Manual Editing" },
-  ];
-
-  return (
-    <section
-      className="py-20 px-6 relative overflow-hidden"
-      style={{
-        background: "var(--bg-mid)",
-        borderTop: `1px solid ${BORDER}`,
-        borderBottom: `1px solid ${BORDER}`,
-      }}
-    >
-      {/* Background glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse 50% 80% at 50% 50%, rgba(0,255,209,0.03) 0%, transparent 70%)`,
-        }}
-      />
-
-      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
-        {stats.map((s, i) => (
-          <div key={i} className="flex flex-col items-center text-center">
-            <p
-              className="font-black leading-none mb-2"
-              style={{
-                fontFamily: "var(--font-syne)",
-                fontSize: "clamp(32px, 6vw, 72px)",
-                color: ACCENT,
-              }}
-            >
-              <Counter target={s.value} suffix={s.suffix} prefix={s.prefix} />
-            </p>
-            <p
-              className="text-sm text-center"
-              style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-            >
-              {s.label}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 /* ─────────────────────────────────────────────
    TESTIMONIALS
@@ -3966,28 +3540,23 @@ export default function ChalchitraLandingPage() {
     >
       <CursorGlow />
       <GlobalGSAP />
-      <Navbar />
-      <HeroSection />
-      <TrustBar />
-      <VisionSection />
+      <VeedHero />
+      <VeedMarquee />
       <div className="section-divider" />
-      <FeaturesBento />
+      <VeedFeatures />
       <div className="section-divider" />
-      <HowItWorks />
+      <VeedHowItWorks />
       <div className="section-divider" />
-      <TemplatesSection />
+      <VeedTemplates />
       <div className="section-divider" />
-      <UseCases />
+      <VeedUseCases />
       <div className="section-divider" />
-      <StatsBar />
+      <VeedTestimonials />
       <div className="section-divider" />
-      <Testimonials />
+      <VeedContact />
       <div className="section-divider" />
-      <ContactSection />
-      <div className="section-divider" />
-      <WaitlistSection />
-      <div className="section-divider" />
-      <Footer />
+      <VeedWaitlist />
+      <VeedFooter />
       <ScrollToTop />
     </main>
   );

@@ -1,8 +1,8 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-// Initialise Resend with the API key from environment variables
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialise Resend with the API key from environment variables (fallback for build env)
+const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy");
 
 /* ─── Types ──────────────────────────────────────────────────── */
 interface ContactPayload {
