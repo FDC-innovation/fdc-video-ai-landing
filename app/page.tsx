@@ -1,15 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useInView,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView, useMotionValue, useSpring } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -110,15 +102,7 @@ function Section({
 /* ─────────────────────────────────────────────
    ANIMATED COUNTER — GSAP ScrollTrigger
 ───────────────────────────────────────────── */
-function Counter({
-  target,
-  suffix = "",
-  prefix = "",
-}: {
-  target: number;
-  suffix?: string;
-  prefix?: string;
-}) {
+function Counter({ target, suffix = "", prefix = "" }: { target: number; suffix?: string; prefix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useGSAP(() => {
@@ -199,10 +183,7 @@ function Navbar() {
     const saved = localStorage.getItem("chalchitra-theme");
     const prefersDark = !saved || saved === "dark";
     setIsDark(prefersDark);
-    document.documentElement.setAttribute(
-      "data-theme",
-      prefersDark ? "dark" : "light"
-    );
+    document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
   }, []);
 
   useEffect(() => {
@@ -221,9 +202,7 @@ function Navbar() {
 
   const scrollTo = useCallback((id: string) => {
     setMenuOpen(false);
-    document
-      .getElementById(id.toLowerCase().replace(/\s+/g, "-"))
-      ?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id.toLowerCase().replace(/\s+/g, "-"))?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
   return (
@@ -245,10 +224,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <span
-            className="text-xl font-black tracking-tight"
-            style={{ fontFamily: "var(--font-syne)" }}
-          >
+          <span className="text-xl font-black tracking-tight" style={{ fontFamily: "var(--font-syne)" }}>
             <span className="text-shimmer">Chalchitra</span>
           </span>
         </div>
@@ -262,9 +238,7 @@ function Navbar() {
               className="text-sm transition-colors duration-200 cursor-pointer bg-transparent border-0"
               style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "var(--text-muted)")
-              }
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
             >
               {l}
             </button>
@@ -407,43 +381,30 @@ function EditorMockup() {
           fontFamily: "var(--font-syne)",
         }}
       >
-        <span
-          className="w-2 h-2 rounded-full pulse-glow"
-          style={{ background: ACCENT }}
-        />
+        <span className="w-2 h-2 rounded-full pulse-glow" style={{ background: ACCENT }} />
         AI Processing · 00:02:14 saved
       </motion.div>
 
       {/* Top bar */}
-      <div
-        className="flex items-center gap-3 px-4 py-3 border-b"
-        style={{ borderBottomColor: BORDER }}
-      >
+      <div className="flex items-center gap-3 px-4 py-3 border-b" style={{ borderBottomColor: BORDER }}>
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full" style={{ background: DANGER }} />
           <div className="w-3 h-3 rounded-full" style={{ background: "#F5A623" }} />
           <div className="w-3 h-3 rounded-full" style={{ background: "#27C940" }} />
         </div>
-        <span
-          className="text-xs mx-auto"
-          style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-        >
+        <span className="text-xs mx-auto" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
           chalchitra_raw.mp4
         </span>
       </div>
 
       {/* Preview area */}
-      <div
-        className="flex gap-px relative"
-        style={{ height: "180px", background: "rgba(0,0,0,0.5)" }}
-      >
+      <div className="flex gap-px relative" style={{ height: "180px", background: "rgba(0,0,0,0.5)" }}>
         {/* RAW side */}
         <div className="relative flex-1 overflow-hidden flex items-end">
           <div
             className="absolute inset-0"
             style={{
-              background:
-                "linear-gradient(135deg, #2a1a0e 0%, #1a0a0a 40%, #0e1520 70%, #080808 100%)",
+              background: "linear-gradient(135deg, #2a1a0e 0%, #1a0a0a 40%, #0e1520 70%, #080808 100%)",
               filter: "contrast(1.4) saturate(0.3) brightness(0.6)",
             }}
           />
@@ -479,10 +440,7 @@ function EditorMockup() {
             className="relative w-5 h-5 rounded-full border-2 flex items-center justify-center"
             style={{ background: "#1a1a1a", borderColor: "rgba(255,255,255,0.6)" }}
           >
-            <div
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ background: "rgba(255,255,255,0.8)" }}
-            />
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(255,255,255,0.8)" }} />
           </div>
         </div>
 
@@ -491,8 +449,7 @@ function EditorMockup() {
           <div
             className="absolute inset-0"
             style={{
-              background:
-                "linear-gradient(135deg, #0a2a1a 0%, #091a2a 40%, #1a0a2a 70%, #0a0a18 100%)",
+              background: "linear-gradient(135deg, #0a2a1a 0%, #091a2a 40%, #1a0a2a 70%, #0a0a18 100%)",
               filter: "contrast(1.1) saturate(1.4) brightness(0.9)",
             }}
           />
@@ -517,10 +474,7 @@ function EditorMockup() {
       </div>
 
       {/* Timeline */}
-      <div
-        className="px-4 py-3 border-t relative overflow-hidden"
-        style={{ borderTopColor: BORDER }}
-      >
+      <div className="px-4 py-3 border-t relative overflow-hidden" style={{ borderTopColor: BORDER }}>
         <div className="flex gap-1 mb-2" style={{ height: "28px" }}>
           {[
             { w: "w-24", color: "bg-purple-600/70" },
@@ -533,17 +487,11 @@ function EditorMockup() {
             { w: "w-16", color: "bg-orange-600/70" },
             { w: "w-14", color: "bg-indigo-600/70" },
           ].map((clip, i) => (
-            <div
-              key={i}
-              className={`${clip.w} ${clip.color} rounded-sm border border-white/10 flex-shrink-0`}
-            />
+            <div key={i} className={`${clip.w} ${clip.color} rounded-sm border border-white/10 flex-shrink-0`} />
           ))}
         </div>
         <div className="playhead absolute top-3 w-px h-8" style={{ background: DANGER }}>
-          <div
-            className="w-2 h-2 rounded-full absolute -top-1 -translate-x-1/2"
-            style={{ background: DANGER }}
-          />
+          <div className="w-2 h-2 rounded-full absolute -top-1 -translate-x-1/2" style={{ background: DANGER }} />
         </div>
       </div>
 
@@ -562,9 +510,7 @@ function EditorMockup() {
                 : s.done
                   ? "rgba(255,255,255,0.04)"
                   : "rgba(255,255,255,0.02)",
-              border: s.active
-                ? `1px solid rgba(0,255,209,0.3)`
-                : `1px solid ${BORDER}`,
+              border: s.active ? `1px solid rgba(0,255,209,0.3)` : `1px solid ${BORDER}`,
               color: s.active ? ACCENT : s.done ? "#888" : "#444",
               fontFamily: "var(--font-inter)",
               boxShadow: s.active ? `0 0 14px rgba(0,255,209,0.2)` : "none",
@@ -573,10 +519,7 @@ function EditorMockup() {
             {s.done ? (
               <CheckCircle2 size={11} style={{ color: ACCENT }} />
             ) : s.active ? (
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-              >
+              <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }}>
                 <Loader2 size={11} />
               </motion.div>
             ) : (
@@ -601,29 +544,10 @@ function HeroSection() {
   useGSAP(() => {
     // ── Hero entrance timeline ─────────────────────────
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    tl.fromTo(
-      "[data-hero-eyebrow]",
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 0.7 }
-    )
-      .fromTo(
-        "[data-hero-line]",
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: 0.9, stagger: 0.15 },
-        "-=0.3"
-      )
-      .fromTo(
-        "[data-hero-sub]",
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 0.7 },
-        "-=0.4"
-      )
-      .fromTo(
-        "[data-hero-cta]",
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        "-=0.35"
-      );
+    tl.fromTo("[data-hero-eyebrow]", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7 })
+      .fromTo("[data-hero-line]", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.9, stagger: 0.15 }, "-=0.3")
+      .fromTo("[data-hero-sub]", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7 }, "-=0.4")
+      .fromTo("[data-hero-cta]", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.35");
 
     // ── Floating mockup ────────────────────────────────
     gsap.to("[data-hero-mockup]", {
@@ -731,8 +655,7 @@ function HeroSection() {
           </div>
           <div className="overflow-hidden mt-2">
             <div data-hero-line className="flex justify-center" style={{ opacity: 0 }}>
-              Start{" "}
-              <span style={{ color: ACCENT, marginLeft: "0.25em" }}>Creating.</span>
+              Start <span style={{ color: ACCENT, marginLeft: "0.25em" }}>Creating.</span>
             </div>
           </div>
         </h1>
@@ -743,25 +666,17 @@ function HeroSection() {
           className="text-lg max-w-2xl mb-10 leading-relaxed"
           style={{ color: MUTED, fontFamily: "var(--font-inter)", opacity: 0 }}
         >
-          Chalchitra turns raw footage and podcast recordings into publish-ready
-          content in minutes. AI-native. No timeline. No complexity.
+          Chalchitra turns raw footage and podcast recordings into publish-ready content in minutes. AI-native. No
+          timeline. No complexity.
         </p>
 
         {/* CTAs */}
-        <div
-          data-hero-cta
-          className="flex flex-col sm:flex-row gap-4 mb-6"
-          style={{ opacity: 0 }}
-        >
+        <div data-hero-cta className="flex flex-col sm:flex-row gap-4 mb-6" style={{ opacity: 0 }}>
           <div ref={ctaWrapRef} style={{ display: "inline-flex" }}>
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: `0 0 32px rgba(0,255,209,0.55)` }}
               whileTap={{ scale: 0.97 }}
-              onClick={() =>
-                document
-                  .getElementById("waitlist")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+              onClick={() => document.getElementById("waitlist")?.scrollIntoView({ behavior: "smooth" })}
               className="px-8 py-4 rounded-full font-bold text-base cursor-pointer transition-all"
               style={{
                 background: ACCENT,
@@ -775,11 +690,7 @@ function HeroSection() {
           <motion.button
             whileHover={{ scale: 1.03, borderColor: "rgba(255,255,255,0.35)" }}
             whileTap={{ scale: 0.97 }}
-            onClick={() =>
-              document
-                .getElementById("features")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+            onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
             className="px-8 py-4 rounded-full font-medium text-base cursor-pointer transition-all"
             style={{
               border: "1px solid rgba(255,255,255,0.14)",
@@ -793,12 +704,8 @@ function HeroSection() {
         </div>
 
         {/* Social proof */}
-        <p
-          className="text-sm mb-14"
-          style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-        >
-          <span style={{ color: ACCENT }}>✦</span> 2,400+ creators on the
-          waitlist
+        <p className="text-sm mb-14" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
+          <span style={{ color: ACCENT }}>✦</span> 2,400+ creators on the waitlist
         </p>
 
         {/* Editor mockup */}
@@ -851,10 +758,7 @@ function TrustBar() {
               className="text-sm font-medium flex-shrink-0 flex items-center gap-3"
               style={{ color: "var(--border)", fontFamily: "var(--font-syne)" }}
             >
-              <span
-                className="w-1.5 h-1.5 rounded-full inline-block"
-                style={{ background: "var(--border)" }}
-              />
+              <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: "var(--border)" }} />
               {item}
             </span>
           ))}
@@ -871,8 +775,7 @@ function FeaturesBento() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
-  const cardBase =
-    "rounded-2xl p-6 border flex flex-col gap-4 cursor-default transition-all duration-300";
+  const cardBase = "rounded-2xl p-6 border flex flex-col gap-4 cursor-default transition-all duration-300";
 
   return (
     <section id="features" className="py-28 px-6" style={{ background: "var(--bg-alt)" }}>
@@ -892,15 +795,10 @@ function FeaturesBento() {
               color: "var(--fg)",
             }}
           >
-            Everything you need.{" "}
-            <span style={{ color: ACCENT }}>Nothing you don&apos;t.</span>
+            AI Powered Transcription <span style={{ color: ACCENT }}>& Editing</span>
           </h2>
-          <p
-            className="text-lg max-w-xl mx-auto"
-            style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-          >
-            From short-form social to long-form podcasts — one AI platform
-            handles it all.
+          <p className="text-lg max-w-xl mx-auto" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
+            From short-form social to long-form podcasts — one AI platform handles it all.
           </p>
         </div>
 
@@ -926,18 +824,12 @@ function FeaturesBento() {
                 <BrainCircuit size={22} style={{ color: ACCENT }} />
               </div>
               <div>
-                <h3
-                  className="font-bold text-lg mb-1"
-                  style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-                >
+                <h3 className="font-bold text-lg mb-1" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
                   AI Smart Edit
                 </h3>
-                <p
-                  className="text-sm"
-                  style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-                >
-                  Drop your footage. Our AI analyzes pacing, removes dead air,
-                  fixes jump cuts, and assembles a polished cut automatically.
+                <p className="text-sm" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
+                  Drop your footage. Our AI analyzes pacing, removes dead air, fixes jump cuts, and assembles a polished
+                  cut automatically.
                 </p>
               </div>
             </div>
@@ -949,10 +841,7 @@ function FeaturesBento() {
               }}
             >
               <div className="absolute inset-0 flex items-center justify-center">
-                <span
-                  className="text-xs"
-                  style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-                >
+                <span className="text-xs" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
                   Analyzing footage...
                 </span>
               </div>
@@ -992,23 +881,13 @@ function FeaturesBento() {
                 Cc
               </span>
             </div>
-            <h3
-              className="font-bold"
-              style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-            >
+            <h3 className="font-bold" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
               Auto Captions
             </h3>
-            <p
-              className="text-sm"
-              style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-            >
-              98% accurate captions in seconds. Animated, branded, ready to
-              post.
+            <p className="text-sm" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
+              98% accurate captions in seconds. Animated, branded, ready to post.
             </p>
-            <div
-              className="rounded-lg p-3 text-xs font-mono"
-              style={{ background: "rgba(0,0,0,0.4)", color: ACCENT }}
-            >
+            <div className="rounded-lg p-3 text-xs font-mono" style={{ background: "rgba(0,0,0,0.4)", color: ACCENT }}>
               <motion.span
                 animate={{ opacity: [0, 1, 1, 0] }}
                 transition={{
@@ -1042,18 +921,11 @@ function FeaturesBento() {
             >
               <Sliders size={18} style={{ color: ACCENT }} />
             </div>
-            <h3
-              className="font-bold"
-              style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-            >
+            <h3 className="font-bold" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
               Smart Reframe
             </h3>
-            <p
-              className="text-sm"
-              style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-            >
-              One video, every platform. Auto-crops for 9:16, 16:9, 1:1 with
-              subject tracking.
+            <p className="text-sm" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
+              One video, every platform. Auto-crops for 9:16, 16:9, 1:1 with subject tracking.
             </p>
             <div className="flex gap-2 items-end">
               {[
@@ -1103,10 +975,7 @@ function FeaturesBento() {
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <h3
-                    className="font-bold text-lg"
-                    style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-                  >
+                  <h3 className="font-bold text-lg" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
                     Podcast Studio
                   </h3>
                   <span
@@ -1121,12 +990,8 @@ function FeaturesBento() {
                     New
                   </span>
                 </div>
-                <p
-                  className="text-sm"
-                  style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-                >
-                  Turn hours of raw podcast into highlights, chapters, viral
-                  clips and show notes — automatically.
+                <p className="text-sm" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
+                  Turn hours of raw podcast into highlights, chapters, viral clips and show notes — automatically.
                 </p>
               </div>
             </div>
@@ -1141,10 +1006,7 @@ function FeaturesBento() {
             >
               {/* Timeline bar */}
               <div className="flex items-center gap-3 mb-4">
-                <span
-                  className="text-xs font-mono flex-shrink-0"
-                  style={{ color: MUTED }}
-                >
+                <span className="text-xs font-mono flex-shrink-0" style={{ color: MUTED }}>
                   0:00
                 </span>
                 <div
@@ -1188,10 +1050,7 @@ function FeaturesBento() {
                     />
                   ))}
                 </div>
-                <span
-                  className="text-xs font-mono flex-shrink-0"
-                  style={{ color: MUTED }}
-                >
+                <span className="text-xs font-mono flex-shrink-0" style={{ color: MUTED }}>
                   2:14:32
                 </span>
               </div>
@@ -1223,10 +1082,7 @@ function FeaturesBento() {
                     >
                       ✦ {clip.label}
                     </p>
-                    <p
-                      className="text-xs font-mono"
-                      style={{ color: MUTED }}
-                    >
+                    <p className="text-xs font-mono" style={{ color: MUTED }}>
                       {clip.time}
                     </p>
                   </motion.div>
@@ -1254,10 +1110,7 @@ function FeaturesBento() {
             >
               <Zap size={18} style={{ color: ACCENT }} />
             </div>
-            <h3
-              className="font-bold"
-              style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-            >
+            <h3 className="font-bold" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
               Silence Remover
             </h3>
             <div className="flex items-end gap-0.5 h-10">
@@ -1269,9 +1122,7 @@ function FeaturesBento() {
                     key={i}
                     className="flex-1 rounded-sm"
                     style={{
-                      background: isSilent
-                        ? "rgba(255,77,77,0.3)"
-                        : `rgba(0,255,209,${0.4 + (i % 4) * 0.15})`,
+                      background: isSilent ? "rgba(255,77,77,0.3)" : `rgba(0,255,209,${0.4 + (i % 4) * 0.15})`,
                       height: isSilent ? "20%" : barHeight,
                     }}
                     animate={!isSilent ? { scaleY: [1, 0.6, 1] } : {}}
@@ -1284,10 +1135,7 @@ function FeaturesBento() {
                 );
               })}
             </div>
-            <p
-              className="text-xs"
-              style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-            >
+            <p className="text-xs" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
               Dead air detected and removed automatically.
             </p>
           </motion.div>
@@ -1311,10 +1159,7 @@ function FeaturesBento() {
             >
               <span style={{ color: ACCENT, fontSize: "18px" }}>♪</span>
             </div>
-            <h3
-              className="font-bold"
-              style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-            >
+            <h3 className="font-bold" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
               AI Music Sync
             </h3>
             <div className="flex items-end gap-1 h-10">
@@ -1334,10 +1179,7 @@ function FeaturesBento() {
                 />
               ))}
             </div>
-            <p
-              className="text-xs"
-              style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-            >
+            <p className="text-xs" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
               Cuts sync to the beat. Royalty-free music library included.
             </p>
           </motion.div>
@@ -1361,10 +1203,7 @@ function FeaturesBento() {
             >
               <span style={{ color: ACCENT, fontSize: "18px" }}>◑</span>
             </div>
-            <h3
-              className="font-bold"
-              style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-            >
+            <h3 className="font-bold" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
               Auto Color Grade
             </h3>
             <div
@@ -1389,10 +1228,7 @@ function FeaturesBento() {
                 </div>
               </div>
             </div>
-            <p
-              className="text-xs"
-              style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-            >
+            <p className="text-xs" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
               Cinematic look applied in one click.
             </p>
           </motion.div>
@@ -1416,25 +1252,15 @@ function FeaturesBento() {
             >
               <span style={{ color: ACCENT, fontSize: "18px" }}>◈</span>
             </div>
-            <h3
-              className="font-bold"
-              style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-            >
+            <h3 className="font-bold" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
               Brand Kit
             </h3>
             <div className="flex gap-2">
               {[ACCENT, "#A78BFA", "#F59E0B", "#EF4444"].map((c, i) => (
-                <div
-                  key={i}
-                  className="w-7 h-7 rounded-lg"
-                  style={{ background: c }}
-                />
+                <div key={i} className="w-7 h-7 rounded-lg" style={{ background: c }} />
               ))}
             </div>
-            <p
-              className="text-xs"
-              style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-            >
+            <p className="text-xs" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
               Upload logo, set colors and fonts once. Every export is branded.
             </p>
           </motion.div>
@@ -1460,18 +1286,11 @@ function FeaturesBento() {
                 <span style={{ color: ACCENT }}>▦</span>
               </div>
               <div>
-                <h3
-                  className="font-bold mb-1"
-                  style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-                >
+                <h3 className="font-bold mb-1" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
                   B-Roll AI Suggestions
                 </h3>
-                <p
-                  className="text-sm"
-                  style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-                >
-                  AI matches your script with relevant stock footage from our
-                  10M+ library.
+                <p className="text-sm" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
+                  AI matches your script with relevant stock footage from our 10M+ library.
                 </p>
               </div>
             </div>
@@ -1520,17 +1339,10 @@ function HowItWorks() {
           style={{ background: "rgba(0,0,0,0.3)", border: `1px solid ${BORDER}` }}
         >
           <div className="flex items-center justify-between text-xs mb-1">
-            <span style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
-              uploading_raw.mp4
-            </span>
-            <span style={{ color: ACCENT, fontFamily: "var(--font-syne)" }}>
-              87%
-            </span>
+            <span style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>uploading_raw.mp4</span>
+            <span style={{ color: ACCENT, fontFamily: "var(--font-syne)" }}>87%</span>
           </div>
-          <div
-            className="h-2 rounded-full overflow-hidden"
-            style={{ background: "rgba(255,255,255,0.05)" }}
-          >
+          <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
             <div
               className="upload-bar h-full rounded-full"
               style={{
@@ -1584,9 +1396,7 @@ function HowItWorks() {
               className="flex items-center gap-2 text-sm"
             >
               <Check size={14} style={{ color: ACCENT }} />
-              <span style={{ color: "#aaa", fontFamily: "var(--font-inter)" }}>
-                {p}
-              </span>
+              <span style={{ color: "#aaa", fontFamily: "var(--font-inter)" }}>{p}</span>
               <div
                 className="ml-auto px-2 py-0.5 rounded-full text-xs"
                 style={{
@@ -1605,11 +1415,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section
-      id="how-it-works"
-      className="py-28 px-6"
-      style={{ background: "var(--bg)" }}
-    >
+    <section id="how-it-works" className="py-28 px-6" style={{ background: "var(--bg)" }}>
       <div className="max-w-6xl mx-auto" ref={ref}>
         <div data-gsap-reveal className="text-center mb-20">
           <p
@@ -1628,10 +1434,7 @@ function HowItWorks() {
           >
             Raw to ready in 3 steps.
           </h2>
-          <p
-            className="text-lg"
-            style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-          >
+          <p className="text-lg" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
             The fastest path from footage to finished.
           </p>
         </div>
@@ -1664,16 +1467,10 @@ function HowItWorks() {
               >
                 {s.icon}
               </div>
-              <h3
-                className="font-bold text-xl mb-2"
-                style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-              >
+              <h3 className="font-bold text-xl mb-2" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
                 {s.title}
               </h3>
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-              >
+              <p className="text-sm leading-relaxed" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
                 {s.body}
               </p>
               {s.visual}
@@ -1688,7 +1485,6 @@ function HowItWorks() {
 /* ─────────────────────────────────────────────
    TEMPLATES
 ───────────────────────────────────────────── */
-
 
 /* ─────────────────────────────────────────────
    USE CASES
@@ -1716,8 +1512,7 @@ function UseCases() {
           className="relative rounded-xl overflow-hidden mb-5"
           style={{
             height: "160px",
-            background:
-              "linear-gradient(135deg, rgba(5,15,10,0.95) 0%, rgba(10,5,20,0.9) 100%)",
+            background: "linear-gradient(135deg, rgba(5,15,10,0.95) 0%, rgba(10,5,20,0.9) 100%)",
             border: `1px solid rgba(0,255,209,0.08)`,
           }}
         >
@@ -1732,10 +1527,7 @@ function UseCases() {
           />
 
           {/* Rainbow timeline track */}
-          <div
-            className="absolute top-5 left-4 right-4 flex gap-1.5 items-end"
-            style={{ height: "36px" }}
-          >
+          <div className="absolute top-5 left-4 right-4 flex gap-1.5 items-end" style={{ height: "36px" }}>
             {[
               { g: "from-pink-500 to-rose-400", flex: 2, filler: false },
               { g: "from-orange-500 to-amber-400", flex: 1, filler: true },
@@ -1753,20 +1545,20 @@ function UseCases() {
                   inView
                     ? clip.filler
                       ? {
-                        opacity: [0, 1, 1, 0],
-                        scaleX: [0, 1, 1, 0],
-                      }
+                          opacity: [0, 1, 1, 0],
+                          scaleX: [0, 1, 1, 0],
+                        }
                       : { opacity: 1, scaleX: 1 }
                     : {}
                 }
                 transition={
                   clip.filler
                     ? {
-                      delay: 0.4 + i * 0.08,
-                      duration: 2.5,
-                      repeat: Infinity,
-                      repeatDelay: 1.5,
-                    }
+                        delay: 0.4 + i * 0.08,
+                        duration: 2.5,
+                        repeat: Infinity,
+                        repeatDelay: 1.5,
+                      }
                     : { delay: 0.25 + i * 0.08, duration: 0.45 }
                 }
               />
@@ -1783,9 +1575,7 @@ function UseCases() {
               fontFamily: "var(--font-syne)",
               fontSize: "10px",
             }}
-            animate={
-              inView ? { opacity: [0, 1, 1, 0] } : {}
-            }
+            animate={inView ? { opacity: [0, 1, 1, 0] } : {}}
             transition={{
               repeat: Infinity,
               duration: 2.5,
@@ -1811,11 +1601,11 @@ function UseCases() {
               animate={
                 inView
                   ? {
-                    y: [0, -24 - i * 6],
-                    x: [(i - 2) * 8, (i - 2) * 16],
-                    opacity: [0, 1, 0],
-                    scale: [0, 1.8, 0],
-                  }
+                      y: [0, -24 - i * 6],
+                      x: [(i - 2) * 8, (i - 2) * 16],
+                      opacity: [0, 1, 0],
+                      scale: [0, 1.8, 0],
+                    }
                   : {}
               }
               transition={{
@@ -1880,8 +1670,7 @@ function UseCases() {
           className="relative rounded-xl overflow-hidden mb-5"
           style={{
             height: "160px",
-            background:
-              "linear-gradient(135deg, rgba(25,12,0,0.95) 0%, rgba(15,8,0,0.95) 100%)",
+            background: "linear-gradient(135deg, rgba(25,12,0,0.95) 0%, rgba(15,8,0,0.95) 100%)",
             border: "1px solid rgba(245,158,11,0.1)",
           }}
         >
@@ -1924,8 +1713,7 @@ function UseCases() {
               style={{
                 background: "rgba(245,158,11,0.14)",
                 border: "1.5px solid rgba(245,158,11,0.5)",
-                boxShadow:
-                  "0 0 24px rgba(245,158,11,0.35), 0 0 8px rgba(245,158,11,0.2)",
+                boxShadow: "0 0 24px rgba(245,158,11,0.35), 0 0 8px rgba(245,158,11,0.2)",
               }}
             >
               <Mic size={20} style={{ color: "#F59E0B" }} />
@@ -1951,11 +1739,7 @@ function UseCases() {
                 whiteSpace: "nowrap",
                 fontSize: "9px",
               }}
-              animate={
-                inView
-                  ? { opacity: [0, 1, 1, 0], y: [0, -8, -20, -36] }
-                  : {}
-              }
+              animate={inView ? { opacity: [0, 1, 1, 0], y: [0, -8, -20, -36] } : {}}
               transition={{
                 repeat: Infinity,
                 duration: 3.5,
@@ -1969,10 +1753,7 @@ function UseCases() {
           ))}
 
           {/* Amber spectrogram waveform */}
-          <div
-            className="absolute bottom-0 left-0 right-0 flex items-end gap-px px-3"
-            style={{ height: "28px" }}
-          >
+          <div className="absolute bottom-0 left-0 right-0 flex items-end gap-px px-3" style={{ height: "28px" }}>
             {Array.from({ length: 44 }).map((_, i) => (
               <motion.div
                 key={i}
@@ -2012,8 +1793,7 @@ function UseCases() {
           className="relative rounded-xl overflow-hidden mb-5"
           style={{
             height: "160px",
-            background:
-              "linear-gradient(135deg, rgba(0,5,20,0.95) 0%, rgba(0,10,18,0.95) 100%)",
+            background: "linear-gradient(135deg, rgba(0,5,20,0.95) 0%, rgba(0,10,18,0.95) 100%)",
             border: "1px solid rgba(59,130,246,0.1)",
           }}
         >
@@ -2052,10 +1832,7 @@ function UseCases() {
                 AI Analyzing...
               </motion.span>
             </div>
-            <div
-              className="h-2 rounded-full overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.04)" }}
-            >
+            <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
               <motion.div
                 className="h-full rounded-full"
                 style={{
@@ -2184,8 +1961,7 @@ function UseCases() {
           className="relative rounded-xl overflow-hidden mb-5"
           style={{
             height: "160px",
-            background:
-              "linear-gradient(135deg, rgba(0,12,12,0.95) 0%, rgba(5,10,15,0.95) 100%)",
+            background: "linear-gradient(135deg, rgba(0,12,12,0.95) 0%, rgba(5,10,15,0.95) 100%)",
             border: "1px solid rgba(20,184,166,0.1)",
           }}
         >
@@ -2239,10 +2015,7 @@ function UseCases() {
                 }}
               >
                 editing live
-                <motion.span
-                  animate={{ opacity: [1, 0.2, 1] }}
-                  transition={{ repeat: Infinity, duration: 1.1 }}
-                >
+                <motion.span animate={{ opacity: [1, 0.2, 1] }} transition={{ repeat: Infinity, duration: 1.1 }}>
                   ...
                 </motion.span>
               </motion.span>
@@ -2284,21 +2057,19 @@ function UseCases() {
                 Brand Kit
               </p>
               <div className="flex gap-1">
-                {["#14B8A6", "#6366F1", "#F59E0B", "#EF4444"].map(
-                  (color, i) => (
-                    <motion.div
-                      key={color}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={inView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: 0.6 + i * 0.08, type: "spring" }}
-                      className="w-5 h-5 rounded"
-                      style={{
-                        background: color,
-                        boxShadow: `0 0 8px ${color}50`,
-                      }}
-                    />
-                  )
-                )}
+                {["#14B8A6", "#6366F1", "#F59E0B", "#EF4444"].map((color, i) => (
+                  <motion.div
+                    key={color}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: 0.6 + i * 0.08, type: "spring" }}
+                    className="w-5 h-5 rounded"
+                    style={{
+                      background: color,
+                      boxShadow: `0 0 8px ${color}50`,
+                    }}
+                  />
+                ))}
               </div>
             </div>
 
@@ -2318,16 +2089,14 @@ function UseCases() {
                   style={{
                     height: fmt.h,
                     width: fmt.w,
-                    background:
-                      "linear-gradient(135deg, rgba(20,184,166,0.14), rgba(99,102,241,0.14))",
+                    background: "linear-gradient(135deg, rgba(20,184,166,0.14), rgba(99,102,241,0.14))",
                     border: "1px solid rgba(20,184,166,0.22)",
                   }}
                 >
                   <motion.div
                     className="absolute inset-0"
                     style={{
-                      background:
-                        "linear-gradient(135deg, #14B8A6, #6366F1)",
+                      background: "linear-gradient(135deg, #14B8A6, #6366F1)",
                       opacity: 0.12,
                     }}
                     animate={{ opacity: [0.08, 0.22, 0.08] }}
@@ -2367,16 +2136,10 @@ function UseCases() {
                   <motion.div
                     className="w-2 h-2 rounded-full flex-shrink-0"
                     style={{
-                      background:
-                        i <= 2 ? "#14B8A6" : "rgba(255,255,255,0.08)",
-                      boxShadow:
-                        i === 2
-                          ? "0 0 8px rgba(20,184,166,0.9)"
-                          : "none",
+                      background: i <= 2 ? "#14B8A6" : "rgba(255,255,255,0.08)",
+                      boxShadow: i === 2 ? "0 0 8px rgba(20,184,166,0.9)" : "none",
                     }}
-                    animate={
-                      i < 3 ? { scale: [1, 1.25, 1] } : {}
-                    }
+                    animate={i < 3 ? { scale: [1, 1.25, 1] } : {}}
                     transition={{
                       repeat: Infinity,
                       duration: 1.6,
@@ -2397,10 +2160,7 @@ function UseCases() {
                   <div
                     className="mx-1.5 h-px flex-1"
                     style={{
-                      background:
-                        i < 2
-                          ? "rgba(20,184,166,0.35)"
-                          : "rgba(255,255,255,0.05)",
+                      background: i < 2 ? "rgba(20,184,166,0.35)" : "rgba(255,255,255,0.05)",
                       minWidth: "10px",
                     }}
                   />
@@ -2414,11 +2174,7 @@ function UseCases() {
   ];
 
   return (
-    <section
-      id="use-cases"
-      className="relative py-28 px-6"
-      style={{ background: "var(--bg)" }}
-    >
+    <section id="use-cases" className="relative py-28 px-6" style={{ background: "var(--bg)" }}>
       {/* Section-wide faint grid */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -2461,8 +2217,7 @@ function UseCases() {
               className="w-full absolute"
               style={{
                 height: "120px",
-                background:
-                  "linear-gradient(to bottom, transparent, rgba(0,255,209,0.18), transparent)",
+                background: "linear-gradient(to bottom, transparent, rgba(0,255,209,0.18), transparent)",
               }}
               animate={inView ? { y: ["-120px", "calc(100% + 120px)"] } : {}}
               transition={{
@@ -2483,12 +2238,9 @@ function UseCases() {
               className="absolute h-full"
               style={{
                 width: "120px",
-                background:
-                  "linear-gradient(to right, transparent, rgba(0,255,209,0.14), transparent)",
+                background: "linear-gradient(to right, transparent, rgba(0,255,209,0.14), transparent)",
               }}
-              animate={
-                inView ? { x: ["-120px", "calc(100% + 120px)"] } : {}
-              }
+              animate={inView ? { x: ["-120px", "calc(100% + 120px)"] } : {}}
               transition={{
                 repeat: Infinity,
                 duration: 4.5,
@@ -2510,8 +2262,7 @@ function UseCases() {
               }}
               className="relative rounded-2xl p-6 border flex flex-col"
               style={{
-                background:
-                  "linear-gradient(145deg, rgba(15,15,15,0.97) 0%, rgba(10,10,10,0.99) 100%)",
+                background: "linear-gradient(145deg, rgba(15,15,15,0.97) 0%, rgba(10,10,10,0.99) 100%)",
                 borderColor: BORDER,
                 borderTopColor: c.borderAccent,
                 borderTopWidth: "2px",
@@ -2563,11 +2314,7 @@ function UseCases() {
                       fontFamily: "var(--font-inter)",
                     }}
                   >
-                    <Check
-                      size={13}
-                      className="mt-0.5 flex-shrink-0"
-                      style={{ color: c.accentColor }}
-                    />
+                    <Check size={13} className="mt-0.5 flex-shrink-0" style={{ color: c.accentColor }} />
                     {b}
                   </li>
                 ))}
@@ -2579,7 +2326,6 @@ function UseCases() {
     </section>
   );
 }
-
 
 /* ─────────────────────────────────────────────
    TESTIMONIALS
@@ -2606,8 +2352,7 @@ function Testimonials() {
       initials: "SR",
     },
     {
-      quote:
-        "It found the best 60 seconds from my 2-hour podcast episode. Like having a producer available on demand.",
+      quote: "It found the best 60 seconds from my 2-hour podcast episode. Like having a producer available on demand.",
       name: "Yasmin A.",
       role: "Podcast Host",
       sub: "Johannesburg",
@@ -2692,16 +2437,10 @@ function Testimonials() {
                   {t.initials}
                 </div>
                 <div>
-                  <p
-                    className="font-semibold text-sm"
-                    style={{ color: "var(--fg)", fontFamily: "var(--font-syne)" }}
-                  >
+                  <p className="font-semibold text-sm" style={{ color: "var(--fg)", fontFamily: "var(--font-syne)" }}>
                     {t.name}
                   </p>
-                  <p
-                    className="text-xs"
-                    style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-                  >
+                  <p className="text-xs" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
                     {t.role}
                     {t.sub ? ` · ${t.sub}` : ""}
                   </p>
@@ -2733,10 +2472,8 @@ function ContactSection() {
   // Basic client-side validation before hitting the API
   function validate(): string | null {
     if (!name.trim()) return "Please enter your name.";
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-      return "Please enter a valid email address.";
-    if (!message.trim() || message.trim().length < 10)
-      return "Message must be at least 10 characters.";
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Please enter a valid email address.";
+    if (!message.trim() || message.trim().length < 10) return "Message must be at least 10 characters.";
     return null;
   }
 
@@ -2770,8 +2507,7 @@ function ContactSection() {
       setEmail("");
       setMessage("");
     } catch (err: unknown) {
-      const msg =
-        err instanceof Error ? err.message : "Failed to send. Please try again.";
+      const msg = err instanceof Error ? err.message : "Failed to send. Please try again.";
       setErrorMsg(msg);
       setStatus("error");
     }
@@ -2801,11 +2537,7 @@ function ContactSection() {
   };
 
   return (
-    <section
-      id="contact"
-      className="relative py-28 px-6 overflow-hidden"
-      style={{ background: "var(--bg-alt)" }}
-    >
+    <section id="contact" className="relative py-28 px-6 overflow-hidden" style={{ background: "var(--bg-alt)" }}>
       {/* Subtle background glow */}
       <div
         className="absolute bottom-0 right-0 pointer-events-none"
@@ -2839,15 +2571,10 @@ function ContactSection() {
               color: "var(--fg)",
             }}
           >
-            Have a question?{" "}
-            <span style={{ color: ACCENT }}>Let&apos;s talk.</span>
+            Have a question? <span style={{ color: ACCENT }}>Let&apos;s talk.</span>
           </h2>
-          <p
-            className="text-base"
-            style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-          >
-            Whether it&apos;s a partnership, early access query, or just a hello
-            — we read every message.
+          <p className="text-base" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
+            Whether it&apos;s a partnership, early access query, or just a hello — we read every message.
           </p>
         </motion.div>
 
@@ -2884,10 +2611,7 @@ function ContactSection() {
                   <CheckCircle2 size={32} style={{ color: ACCENT }} />
                 </motion.div>
                 <div>
-                  <p
-                    className="text-xl font-bold mb-2"
-                    style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-                  >
+                  <p className="text-xl font-bold mb-2" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
                     Message sent!
                   </p>
                   <p style={{ color: MUTED, fontFamily: "var(--font-inter)", fontSize: 14 }}>
@@ -2976,8 +2700,7 @@ function ContactSection() {
                     onChange={(e) => setMessage(e.target.value)}
                     onFocus={(e) => {
                       (e.target as HTMLTextAreaElement).style.borderColor = ACCENT;
-                      (e.target as HTMLTextAreaElement).style.boxShadow =
-                        `0 0 0 3px rgba(var(--accent-rgb), 0.1)`;
+                      (e.target as HTMLTextAreaElement).style.boxShadow = `0 0 0 3px rgba(var(--accent-rgb), 0.1)`;
                     }}
                     onBlur={(e) => {
                       (e.target as HTMLTextAreaElement).style.borderColor = "var(--border)";
@@ -3018,9 +2741,7 @@ function ContactSection() {
                   type="submit"
                   disabled={status === "loading"}
                   whileHover={
-                    status !== "loading"
-                      ? { scale: 1.02, boxShadow: `0 0 28px rgba(var(--accent-rgb),0.4)` }
-                      : {}
+                    status !== "loading" ? { scale: 1.02, boxShadow: `0 0 28px rgba(var(--accent-rgb),0.4)` } : {}
                   }
                   whileTap={status !== "loading" ? { scale: 0.98 } : {}}
                   className="w-full py-4 rounded-xl font-bold text-base cursor-pointer transition-all flex items-center justify-center gap-2"
@@ -3051,10 +2772,7 @@ function ContactSection() {
                   )}
                 </motion.button>
 
-                <p
-                  className="text-center text-xs"
-                  style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-                >
+                <p className="text-center text-xs" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
                   🔒 Your info is never shared with third parties.
                 </p>
               </motion.form>
@@ -3075,11 +2793,7 @@ function WaitlistSection() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section
-      id="waitlist"
-      className="relative py-32 px-6 overflow-hidden"
-      style={{ background: "var(--bg)" }}
-    >
+    <section id="waitlist" className="relative py-32 px-6 overflow-hidden" style={{ background: "var(--bg)" }}>
       {/* Background glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full"
@@ -3125,8 +2839,7 @@ function WaitlistSection() {
           className="mb-10 text-base leading-relaxed"
           style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
         >
-          Join 2,400+ creators worldwide. Get early access and help shape the
-          future of AI video and podcast creation.
+          Join 2,400+ creators worldwide. Get early access and help shape the future of AI video and podcast creation.
         </motion.p>
 
         <AnimatePresence mode="wait">
@@ -3156,9 +2869,7 @@ function WaitlistSection() {
                   outline: "none",
                 }}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) =>
-                  (e.target.style.borderColor = "rgba(255,255,255,0.1)")
-                }
+                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
               />
               <input
                 type="email"
@@ -3173,9 +2884,7 @@ function WaitlistSection() {
                   outline: "none",
                 }}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) =>
-                  (e.target.style.borderColor = "rgba(255,255,255,0.1)")
-                }
+                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
               />
               <select
                 required
@@ -3189,9 +2898,7 @@ function WaitlistSection() {
                   outline: "none",
                 }}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) =>
-                  (e.target.style.borderColor = "rgba(255,255,255,0.1)")
-                }
+                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
               >
                 <option value="" disabled>
                   What do you create?
@@ -3219,10 +2926,7 @@ function WaitlistSection() {
                 }}
               >
                 Reserve My Spot
-                <motion.span
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                >
+                <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
                   <ChevronRight size={18} />
                 </motion.span>
               </motion.button>
@@ -3247,16 +2951,10 @@ function WaitlistSection() {
               >
                 <Check size={28} style={{ color: ACCENT }} />
               </motion.div>
-              <p
-                className="text-xl font-bold"
-                style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}
-              >
+              <p className="text-xl font-bold" style={{ fontFamily: "var(--font-syne)", color: "var(--fg)" }}>
                 You&apos;re on the list!
               </p>
-              <p
-                className="text-sm"
-                style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-              >
+              <p className="text-sm" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
                 We&apos;ll be in touch with early access details soon.
               </p>
             </motion.div>
@@ -3279,22 +2977,20 @@ function WaitlistSection() {
           transition={{ delay: 0.6 }}
           className="flex flex-wrap justify-center gap-2 mt-6"
         >
-          {["Priority Early Access", "Founding Member Status", "Shape the Roadmap"].map(
-            (pill, i) => (
-              <span
-                key={i}
-                className="text-xs px-3 py-1.5 rounded-full"
-                style={{
-                  border: `1px solid rgba(0,255,209,0.18)`,
-                  color: ACCENT,
-                  background: "rgba(0,255,209,0.04)",
-                  fontFamily: "var(--font-inter)",
-                }}
-              >
-                {pill}
-              </span>
-            )
-          )}
+          {["Priority Early Access", "Founding Member Status", "Shape the Roadmap"].map((pill, i) => (
+            <span
+              key={i}
+              className="text-xs px-3 py-1.5 rounded-full"
+              style={{
+                border: `1px solid rgba(0,255,209,0.18)`,
+                color: ACCENT,
+                background: "rgba(0,255,209,0.04)",
+                fontFamily: "var(--font-inter)",
+              }}
+            >
+              {pill}
+            </span>
+          ))}
         </motion.div>
       </div>
     </section>
@@ -3312,25 +3008,16 @@ function Footer() {
   ];
 
   return (
-    <footer
-      className="px-6 pt-16 pb-8"
-      style={{ background: "var(--bg)", borderTop: `1px solid ${BORDER}` }}
-    >
+    <footer className="px-6 pt-16 pb-8" style={{ background: "var(--bg)", borderTop: `1px solid ${BORDER}` }}>
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-3">
-              <span
-                className="text-xl font-black text-shimmer"
-                style={{ fontFamily: "var(--font-syne)" }}
-              >
+              <span className="text-xl font-black text-shimmer" style={{ fontFamily: "var(--font-syne)" }}>
                 Chalchitra
               </span>
             </div>
-            <p
-              className="text-sm leading-relaxed"
-              style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-            >
+            <p className="text-sm leading-relaxed" style={{ color: MUTED, fontFamily: "var(--font-inter)" }}>
               The AI-native creation studio.
               <br />
               Edit less. Create more.
@@ -3339,10 +3026,7 @@ function Footer() {
 
           {cols.map((col) => (
             <div key={col.title}>
-              <p
-                className="font-bold text-sm mb-4"
-                style={{ fontFamily: "var(--font-syne)", color: "#555" }}
-              >
+              <p className="font-bold text-sm mb-4" style={{ fontFamily: "var(--font-syne)", color: "#555" }}>
                 {col.title}
               </p>
               <ul className="flex flex-col gap-2.5">
@@ -3352,12 +3036,8 @@ function Footer() {
                       href="#"
                       className="text-sm transition-colors duration-200"
                       style={{ color: MUTED, fontFamily: "var(--font-inter)" }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = "var(--fg)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.color = MUTED)
-                      }
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = MUTED)}
                     >
                       {l}
                     </a>
@@ -3372,10 +3052,7 @@ function Footer() {
           className="flex flex-col sm:flex-row items-center justify-between pt-6 gap-4"
           style={{ borderTop: `1px solid ${BORDER}` }}
         >
-          <p
-            className="text-xs"
-            style={{ color: "#2a2a2a", fontFamily: "var(--font-inter)" }}
-          >
+          <p className="text-xs" style={{ color: "#2a2a2a", fontFamily: "var(--font-inter)" }}>
             © 2025 Chalchitra. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
@@ -3385,12 +3062,8 @@ function Footer() {
                 href="#"
                 whileHover={{ scale: 1.2 }}
                 style={{ color: "var(--border)", display: "flex" }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = ACCENT)
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "var(--border)")
-                }
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = ACCENT)}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--border)")}
               >
                 <Icon size={16} />
               </motion.a>
@@ -3449,7 +3122,7 @@ function GlobalGSAP() {
           duration: 0.85,
           ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 88%", once: true },
-        }
+        },
       );
     });
 
@@ -3466,7 +3139,7 @@ function GlobalGSAP() {
           ease: "power3.out",
           stagger: 0.09,
           scrollTrigger: { trigger: grid, start: "top 85%", once: true },
-        }
+        },
       );
     });
 
@@ -3483,7 +3156,7 @@ function GlobalGSAP() {
           ease: "power3.out",
           stagger: 0.18,
           scrollTrigger: { trigger: stepCards[0], start: "top 88%", once: true },
-        }
+        },
       );
     }
 
@@ -3500,7 +3173,7 @@ function GlobalGSAP() {
           ease: "power3.out",
           stagger: 0.07,
           scrollTrigger: { trigger: tCards[0], start: "top 88%", once: true },
-        }
+        },
       );
     }
 
@@ -3517,7 +3190,7 @@ function GlobalGSAP() {
           ease: "power3.out",
           stagger: 0.12,
           scrollTrigger: { trigger: ucCards[0], start: "top 88%", once: true },
-        }
+        },
       );
     }
   });
@@ -3534,10 +3207,7 @@ export default function ChalchitraLandingPage() {
   void stagger;
 
   return (
-    <main
-      className="film-grain"
-      style={{ background: "var(--bg)", minHeight: "100vh" }}
-    >
+    <main className="film-grain" style={{ background: "var(--bg)", minHeight: "100vh" }}>
       <CursorGlow />
       <GlobalGSAP />
       <VeedHero />
