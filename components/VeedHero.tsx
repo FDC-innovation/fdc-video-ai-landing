@@ -1,44 +1,157 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ChevronRight, Download, Subtitles, MoreVertical, Edit2 } from "lucide-react";
-import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, Subtitles, MoreVertical, Edit2, Menu, X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+
+function scrollTo(id: string, closeMobile?: () => void) {
+  closeMobile?.();
+  setTimeout(() => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }, closeMobile ? 200 : 0);
+}
+
+const links = [
+  { label: "Features", id: "features" },
+  { label: "Templates", id: "templates" },
+  { label: "How It Works", id: "how-it-works" },
+  { label: "Use Cases", id: "use-cases" },
+  { label: "Contact", id: "contact" },
+];
+
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const closeMenu = () => setMenuOpen(false);
+
+  return (
+    <>
+      {/* Fixed pill navbar */}
+      <motion.div
+        initial={{ y: -24, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-4 left-0 right-0 z-[999] flex justify-center px-4"
+      >
+        <div
+          className="w-full max-w-[780px] flex items-center justify-between transition-all duration-500"
+          style={{
+            background: scrolled ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.6)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            border: scrolled ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(0,0,0,0.05)",
+            borderRadius: "100px",
+            padding: "8px 8px 8px 24px",
+            boxShadow: scrolled
+              ? "0 8px 40px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.8) inset"
+              : "0 4px 20px rgba(0,0,0,0.04)",
+          }}
+        >
+          {/* Logo */}
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="text-[17px] font-[900] tracking-tight text-[#1C1C1C] whitespace-nowrap bg-transparent border-0 p-0 cursor-pointer"
+            style={{ fontFamily: "var(--font-syne)" }}
+          >
+            Chalchitra
+          </button>
+
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-1">
+            {links.map(({ label, id }) => (
+              <button
+                key={id}
+                onClick={() => scrollTo(id)}
+                className="px-4 py-2 rounded-full text-[13px] font-medium text-[#52525B] hover:text-[#1C1C1C] hover:bg-black/[0.04] transition-all duration-150 bg-transparent border-0 cursor-pointer whitespace-nowrap"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {/* CTA + mobile toggle */}
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="md:hidden w-9 h-9 rounded-full flex items-center justify-center text-[#52525B] hover:bg-black/[0.05] transition-colors bg-transparent border-0 cursor-pointer"
+          >
+            {menuOpen ? <X size={17} strokeWidth={2.5} /> : <Menu size={17} strokeWidth={2.5} />}
+          </button>
+        </div>
+      </motion.div>
+
+      {/* Mobile dropdown */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -12, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.97 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed top-[72px] left-4 right-4 z-[998] rounded-[24px] overflow-hidden"
+            style={{
+              background: "rgba(255,255,255,0.95)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              border: "1px solid rgba(0,0,0,0.07)",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.12)",
+            }}
+          >
+            <div className="flex flex-col p-3 gap-1">
+              {links.map(({ label, id }, i) => (
+                <motion.button
+                  key={id}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  onClick={() => scrollTo(id, closeMenu)}
+                  className="text-left px-4 py-3 rounded-xl text-[15px] font-medium text-[#3F3F46] hover:text-[#1C1C1C] hover:bg-black/[0.04] transition-all bg-transparent border-0 cursor-pointer"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  {label}
+                </motion.button>
+              ))}
+              <div className="h-px mx-2 my-1 bg-black/[0.05]" />
+              <button
+                onClick={() => scrollTo("contact", closeMenu)}
+                className="mx-1 mb-1 py-3 rounded-xl text-[15px] font-bold text-white cursor-pointer border-0"
+                style={{
+                  background: "linear-gradient(135deg, #7D55FA, #5A3FD4)",
+                  fontFamily: "var(--font-syne)",
+                }}
+              >
+                Get Early Access →
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
 
 export function VeedHero() {
   return (
     <div className="bg-[#F4F4F5] text-[#121212] min-h-[90vh] font-sans">
-      {/* Navbar */}
-      <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-        <div className="flex items-center gap-10">
-          <div
-            className="text-3xl font-black tracking-tighter uppercase whitespace-nowrap"
-            style={{ fontFamily: "Impact, sans-serif" }}
-          >
-            Chalchitra
-          </div>
-          <div className="hidden lg:flex items-center gap-6 text-[15px] font-medium text-[#4B4B4B]">
-            <span className="cursor-pointer hover:text-black transition-colors">Features</span>
-            <span className="cursor-pointer hover:text-black transition-colors">Templates</span>
-            <span className="cursor-pointer hover:text-black transition-colors">How It Works</span>
-            <span className="cursor-pointer hover:text-black transition-colors">Use Cases</span>
-            <span className="cursor-pointer hover:text-black transition-colors">Contact</span>
-          </div>
-        </div>
-        <div className="hidden md:flex items-center gap-4 text-[15px] font-medium">
-          <button className="bg-[#1C1C1C] text-white px-6 py-2.5 rounded-full hover:bg-black transition-colors font-medium">
-            Get Early Access →
-          </button>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Main Hero Container */}
-      <div className="max-w-7xl mx-auto px-6 pt-10 pb-16">
+      <div className="max-w-7xl mx-auto px-6 pt-28 pb-16">
         {/* Hero Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left Side */}
           <div className="flex flex-col items-start">
             <div className="mb-4 flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-semibold bg-[#7D55FA]/10 text-[#7D55FA] border border-[#7D55FA]/20">
-              <span className="animate-pulse">✦</span> Chalchitra AI Studio · Closed Beta
+              <span className="animate-pulse">✦</span> Chalchitra AI Studio
             </div>
             <h1
               className="text-[52px] md:text-[68px] lg:text-[76px] font-[900] leading-[0.9] tracking-[-0.02em] text-[#1C1C1C] mb-6"
@@ -56,6 +169,7 @@ export function VeedHero() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => scrollTo("contact")}
                 className="bg-[#7D55FA] text-white px-8 py-4 rounded-full text-[18px] font-semibold flex items-center justify-center hover:bg-[#6841E3] transition-colors shadow-sm"
               >
                 Get Early Access
@@ -63,6 +177,7 @@ export function VeedHero() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => scrollTo("features")}
                 className="bg-white border border-gray-200 text-[#1C1C1C] px-8 py-4 rounded-full text-[18px] font-medium flex items-center justify-center hover:bg-gray-50 transition-colors shadow-sm"
               >
                 See What It Can Do ↓

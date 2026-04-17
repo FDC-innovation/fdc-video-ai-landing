@@ -8,12 +8,9 @@ import { useGSAP } from "@gsap/react";
 import { VeedHero } from "../components/VeedHero";
 import { VeedHowItWorks } from "../components/VeedHowItWorks";
 import { VeedFeatures } from "../components/VeedFeatures";
-import { VeedMarquee } from "../components/VeedMarquee";
 import { VeedUseCases } from "../components/VeedUseCases";
 import { VeedTemplates } from "../components/VeedTemplates";
-import { VeedTestimonials } from "../components/VeedTestimonials";
 import { VeedContact } from "../components/VeedContact";
-import { VeedWaitlist } from "../components/VeedWaitlist";
 import { VeedFooter } from "../components/VeedFooter";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -636,7 +633,7 @@ function HeroSection() {
           >
             ✦
           </motion.span>
-          <span>Chalchitra AI Studio · Closed Beta</span>
+          <span>Chalchitra AI Studio</span>
         </div>
 
         {/* Headline */}
@@ -3211,7 +3208,6 @@ export default function ChalchitraLandingPage() {
       <CursorGlow />
       <GlobalGSAP />
       <VeedHero />
-      <VeedMarquee />
       <div className="section-divider" />
       <VeedFeatures />
       <div className="section-divider" />
@@ -3221,11 +3217,7 @@ export default function ChalchitraLandingPage() {
       <div className="section-divider" />
       <VeedUseCases />
       <div className="section-divider" />
-      <VeedTestimonials />
-      <div className="section-divider" />
       <VeedContact />
-      <div className="section-divider" />
-      <VeedWaitlist />
       <VeedFooter />
       <ScrollToTop />
     </main>

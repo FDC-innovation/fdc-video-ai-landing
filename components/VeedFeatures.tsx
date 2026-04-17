@@ -53,7 +53,7 @@ function VisualCard({ children, bgClass }: { children: React.ReactNode; bgClass:
 
 export function VeedFeatures() {
   return (
-    <section className="bg-[#F4F4F5] py-24 px-6 md:px-12 w-full font-sans border-b border-gray-100">
+    <section id="features" className="bg-[#F4F4F5] py-24 px-6 md:px-12 w-full font-sans border-b border-gray-100">
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
         <div className="mb-20 text-center max-w-3xl mx-auto">

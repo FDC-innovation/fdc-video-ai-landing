@@ -115,7 +115,7 @@ export function VeedHowItWorks() {
   ];
 
   return (
-    <section className="bg-[#F4F4F5] py-24 px-6 md:px-12 w-full font-sans">
+    <section id="how-it-works" className="bg-[#F4F4F5] py-24 px-6 md:px-12 w-full font-sans">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <p className="text-[#5A6BFB] font-bold text-sm tracking-widest uppercase mb-4">How It Works</p>
