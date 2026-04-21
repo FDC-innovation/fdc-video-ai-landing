@@ -92,6 +92,66 @@ export function VeedContact() {
             Whether it&apos;s a partnership, early access query, or just a hello — we read every single message.
           </p>
 
+          {/* Contact persons */}
+          <div className="flex flex-col gap-4 mt-2">
+            {/* Ashish Pant */}
+            <div
+              className="rounded-2xl p-5 flex flex-col gap-1.5"
+              style={{ background: "rgba(90,107,251,0.04)", border: "1px solid rgba(90,107,251,0.12)" }}
+            >
+              <p className="text-[15px] font-bold text-[#1C1C1C]" style={{ fontFamily: "var(--font-inter)" }}>
+                Ashish Pant
+              </p>
+              <a
+                href="mailto:Ashish.Pant@fastdataconnect.com"
+                className="text-[13px] text-[#5A6BFB] hover:underline"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                Ashish.Pant@fastdataconnect.com
+              </a>
+              <div className="flex flex-col gap-0.5">
+                <a
+                  href="tel:+919084704417"
+                  className="text-[13px] text-[#737373] hover:text-[#1C1C1C] transition-colors"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  +91 9084704417
+                </a>
+                <a
+                  href="tel:+12402521259"
+                  className="text-[13px] text-[#737373] hover:text-[#1C1C1C] transition-colors"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  +1 (240) 252-1259
+                </a>
+              </div>
+            </div>
+
+            {/* Mike Agar */}
+            <div
+              className="rounded-2xl p-5 flex flex-col gap-1.5"
+              style={{ background: "rgba(217,70,239,0.04)", border: "1px solid rgba(217,70,239,0.12)" }}
+            >
+              <p className="text-[15px] font-bold text-[#1C1C1C]" style={{ fontFamily: "var(--font-inter)" }}>
+                Mike Agar
+              </p>
+              <a
+                href="mailto:mike.agar@fastdataconnect.com"
+                className="text-[13px] text-[#5A6BFB] hover:underline"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                mike.agar@fastdataconnect.com
+              </a>
+              <a
+                href="tel:+12035717669"
+                className="text-[13px] text-[#737373] hover:text-[#1C1C1C] transition-colors"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                +1 (203) 571-7669
+              </a>
+            </div>
+          </div>
+
           <div className="flex items-center gap-3 text-sm font-medium text-[#737373]" style={{ fontFamily: "var(--font-inter)" }}>
             <div className="w-10 h-10 rounded-full bg-[#EEF2FF] flex items-center justify-center">
               <span className="text-xl">🔒</span>
