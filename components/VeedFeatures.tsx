@@ -168,52 +168,6 @@ export function VeedFeatures() {
             />
           </div>
 
-          {/* 4. Podcast Studio (Text Left, Visual Right) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="order-2 lg:order-1">
-              <TextCard
-                title="Podcast Studio"
-                desc="Turn hours of raw podcast into highlights, chapters, viral clips and show notes — automatically."
-                tag="NEW"
-              />
-            </div>
-            <div className="order-1 lg:order-2">
-              <VisualCard bgClass="bg-[#FDF4FF] p-0 block relative">
-                <div className="absolute inset-4 rounded-[24px] overflow-hidden border border-white/50 shadow-sm">
-                  <img src="/photo/podcast.png" alt="Podcast Studio" className="w-full h-full object-cover" />
-                </div>
-
-                {/* Overlay Timeline UI */}
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[90%] max-w-[400px] bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100">
-                  <div className="flex justify-between items-center text-[11px] font-mono text-gray-500 mb-2 font-bold">
-                    <span>0:00</span>
-                    <span>2:14:32</span>
-                  </div>
-
-                  <div className="relative mb-6">
-                    <div className="w-full h-2 bg-gray-200 rounded-full" />
-                    <div className="absolute top-0 left-[15%] w-[20%] h-2 bg-[#5A6BFB] rounded-full shadow-sm" />
-                    <div className="absolute top-0 left-[55%] w-[12%] h-2 bg-pink-500 rounded-full shadow-sm" />
-                  </div>
-
-                  <div className="flex flex-col gap-2.5">
-                    <div className="flex justify-between items-center bg-white px-3 py-2 rounded-lg border border-gray-100 shadow-sm">
-                      <div className="flex items-center gap-2 text-[13px] font-semibold text-gray-800">
-                        <span className="text-[#5A6BFB]">✦</span> Best Moment
-                      </div>
-                      <span className="text-[12px] font-mono text-gray-400">12:34</span>
-                    </div>
-                    <div className="flex justify-between items-center bg-white px-3 py-2 rounded-lg border border-gray-100 shadow-sm">
-                      <div className="flex items-center gap-2 text-[13px] font-semibold text-gray-800">
-                        <span className="text-pink-500">✦</span> Viral Hook
-                      </div>
-                      <span className="text-[12px] font-mono text-gray-400">1:24:15</span>
-                    </div>
-                  </div>
-                </div>
-              </VisualCard>
-            </div>
-          </div>
         </div>
 
         {/* SMALLER GRID - Remainder 5 Features */}

@@ -183,9 +183,6 @@ export function VeedHero() {
                 See What It Can Do ↓
               </motion.button>
             </div>
-            <p className="text-[14px] text-[#71717A] font-medium ml-2">
-              <span className="text-[#7D55FA]">✦</span> 2,400+ creators on the waitlist
-            </p>
           </div>
 
           {/* Right Side (Image + Widget) */}
@@ -290,41 +287,6 @@ export function VeedHero() {
         </div>
       </div>
 
-      {/* Trust Section */}
-      <div className="max-w-7xl mx-auto px-6 pb-20 flex flex-col items-center">
-        {/* Rating Pill */}
-        <div className="bg-white inline-flex items-center gap-4 px-6 py-3 rounded-full shadow-sm mb-12 border border-gray-100">
-          <div className="flex items-center gap-2">
-            <div className="bg-[#1C1C1C] text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold">
-              C
-            </div>
-            <span className="text-[22px] font-bold text-[#1C1C1C]">4.6</span>
-          </div>
-          <div className="flex gap-1 items-center">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <svg
-                key={i}
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill={i === 5 ? "url(#half)" : "#828282"}
-                stroke="none"
-              >
-                {i === 5 && (
-                  <defs>
-                    <linearGradient id="half">
-                      <stop offset="50%" stopColor="#828282" />
-                      <stop offset="50%" stopColor="#E5E7EB" />
-                    </linearGradient>
-                  </defs>
-                )}
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-            ))}
-          </div>
-          <span className="text-[#71717A] text-[15px] font-medium pr-2">319 reviews</span>
-        </div>
-      </div>
     </div>
   );
 }

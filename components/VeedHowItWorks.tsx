@@ -1,160 +1,354 @@
 "use client";
 
-import { motion } from "framer-motion";
-import React from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Mic2, BrainCircuit, Sparkles, Scissors, Film } from "lucide-react";
 
-export function VeedHowItWorks() {
-  const steps = [
-    {
-      step: "STEP 1",
-      title: "Drop Your Footage",
-      description: "Any format. Phone video, screen recording, DSLR, podcast audio. Chalchitra accepts everything.",
-      illustration: (
-        <div className="relative w-full h-[200px] flex items-center justify-center bg-transparent">
-          {/* VEED-style simple overlapping shapes */}
-          {/* Cloud base */}
-          <div className="absolute w-24 h-16 bg-[#5A6BFB] rounded-full top-[50%] left-[45%] -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute w-16 h-16 bg-[#5A6BFB] rounded-full top-[40%] left-[38%] -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute w-14 h-14 bg-[#5A6BFB] rounded-full top-[60%] left-[32%] -translate-x-1/2 -translate-y-1/2" />
-          
-          {/* Floating upload circle */}
-          <motion.div 
-            animate={{ y: [0, -8, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="absolute w-16 h-16 bg-gradient-to-t from-[#B0A6FF]/40 to-[#EAE7FF]/90 rounded-full flex flex-col items-center justify-center top-[65%] left-[55%] -translate-x-1/2 -translate-y-1/2 backdrop-blur-md border border-white/40 shadow-sm"
-          >
-            <div className="text-white">↑</div>
-            <div className="text-[8px] font-bold text-white leading-none mt-1">87%</div>
-          </motion.div>
-          {/* Tiny floating file indicator */}
-          <motion.div 
-            initial={{ opacity: 0.8 }}
-            animate={{ opacity: 1, scale: [1, 1.05, 1] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="absolute top-[25%] right-[20%] bg-white px-2 py-1 rounded-[6px] shadow-sm text-[8px] font-semibold text-gray-500 border border-gray-100"
-          >
-            uploading_raw.mp4
-          </motion.div>
-        </div>
-      )
-    },
-    {
-      step: "STEP 2",
-      title: "Pick a Template",
-      description: "Choose from 60+ templates or describe your vibe. Set platform, length, tone.",
-      illustration: (
-        <div className="relative w-full h-[200px] flex items-center justify-center bg-transparent">
-          {/* Sparkles */}
-          <motion.div 
-             animate={{ rotate: 360 }}
-             transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-             className="absolute top-[30%] right-[30%] text-[#B0A6FF] text-4xl opacity-60"
-          >
-            ✦
-          </motion.div>
-          
-          {/* Central rounded square */}
-          <div className="absolute w-24 h-24 bg-[#5A6BFB] rounded-[20px] flex items-center justify-center top-[50%] left-[45%] -translate-x-1/2 -translate-y-1/2 shadow-inner overflow-hidden">
-             {/* Magic wand / Style icon representation */}
-             <div className="w-12 h-12 border-2 border-white/60 rounded-full flex items-center justify-center relative">
-               <div className="w-full h-px bg-white/60 absolute" />
-               <div className="w-px h-full bg-white/60 absolute" />
-             </div>
-          </div>
+/* ── Pipeline nodes shown in the center flow ── */
+const pipelineNodes = [
+  { Icon: Mic2,         label: "Transcribe",  sub: "Whisper AI",      color: "#818CF8" },
+  { Icon: BrainCircuit, label: "Understand",  sub: "Auto-metadata",   color: "#C084FC" },
+  { Icon: Sparkles,     label: "Find Clips",  sub: "Top 3 moments",   color: "#F472B6" },
+  { Icon: Scissors,     label: "Cut & Sync",  sub: "Frame-accurate",  color: "#34D399" },
+  { Icon: Film,         label: "Render",      sub: "Social-ready",    color: "#FB923C" },
+];
 
-          <motion.div 
-            animate={{ y: [0, 5, 0] }}
-            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 1 }}
-            className="absolute top-[65%] right-[35%] bg-white/90 px-3 py-1.5 rounded-lg shadow-md border border-gray-100 backdrop-blur-sm"
-          >
-            <div className="text-[10px] font-bold text-[#5A6BFB]">VIBE SETTINGS</div>
-            <div className="flex gap-1 mt-1">
-               <span className="w-2 h-2 rounded-full bg-pink-400" />
-               <span className="w-2 h-2 rounded-full bg-blue-400" />
-               <span className="w-2 h-2 rounded-full bg-orange-400" />
-            </div>
-          </motion.div>
-        </div>
-      )
-    },
-    {
-      step: "STEP 3",
-      title: "Download or Publish",
-      description: "Export to YouTube, TikTok, Instagram, LinkedIn, Spotify simultaneously. One click.",
-      illustration: (
-        <div className="relative w-full h-[200px] flex items-center justify-center bg-transparent">
-          {/* Document shape */}
-          <div className="absolute w-20 h-24 bg-[#5A6BFB] rounded-xl top-[45%] left-[50%] -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute w-8 h-8 bg-[#F4F4F5] rounded-bl-xl top-[35%] right-[35%] mix-blend-screen" />
-          
-          {/* Frosted folder front */}
-          <motion.div 
-            animate={{ y: [0, -4, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 }}
-            className="absolute w-28 h-16 bg-gradient-to-t from-[#B0A6FF]/60 to-[#EAE7FF]/90 rounded-xl top-[58%] left-[50%] -translate-x-1/2 -translate-y-1/2 backdrop-blur-md shadow-sm border border-white/50"
-          />
+/* ── Animated flowing dots along a connector line ── */
+function FlowDots({ color }: { color: string }) {
+  return (
+    <div className="relative w-full h-0.5" style={{ background: "rgba(255,255,255,0.07)" }}>
+      {[0, 1, 2].map((i) => (
+        <motion.div
+          key={i}
+          className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
+          style={{ background: color, boxShadow: `0 0 6px ${color}` }}
+          animate={{ x: ["-120%", "800%"] }}
+          transition={{ repeat: Infinity, duration: 1.6, delay: i * 0.53, ease: "linear" }}
+        />
+      ))}
+    </div>
+  );
+}
 
-          {/* Social media ready pills */}
-          <div className="absolute top-[30%] -left-[5%] flex flex-col gap-1.5">
-             <div className="bg-white px-2 py-0.5 rounded-md shadow-sm border border-gray-100 flex items-center gap-1.5 transform -rotate-6">
-                <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                <span className="text-[8px] font-bold text-gray-700">YouTube Ready</span>
-             </div>
-             <div className="bg-white px-2 py-0.5 rounded-md shadow-sm border border-gray-100 flex items-center gap-1.5 transform rotate-3 ml-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-black" />
-                <span className="text-[8px] font-bold text-gray-700">TikTok Ready</span>
-             </div>
-             <div className="bg-white px-2 py-0.5 rounded-md shadow-sm border border-gray-100 flex items-center gap-1.5 transform -rotate-2 ml-1">
-                <div className="w-1.5 h-1.5 rounded-full bg-pink-500" />
-                <span className="text-[8px] font-bold text-gray-700">IG Ready</span>
-             </div>
-          </div>
+/* ── One pipeline step node ── */
+function PipelineNode({
+  node,
+  index,
+  inView,
+}: {
+  node: (typeof pipelineNodes)[0];
+  index: number;
+  inView: boolean;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+      className="flex flex-col items-center gap-2"
+    >
+      <motion.div
+        animate={{ boxShadow: [`0 0 0px ${node.color}60`, `0 0 18px ${node.color}80`, `0 0 0px ${node.color}60`] }}
+        transition={{ repeat: Infinity, duration: 2.2, delay: index * 0.4 }}
+        className="w-12 h-12 rounded-2xl flex items-center justify-center"
+        style={{ background: `${node.color}18`, border: `1.5px solid ${node.color}50` }}
+      >
+        <node.Icon size={20} style={{ color: node.color }} strokeWidth={1.8} />
+      </motion.div>
+      <p className="text-[11px] font-bold text-white/80 text-center leading-tight" style={{ fontFamily: "var(--font-syne)" }}>
+        {node.label}
+      </p>
+      <p className="text-[10px] text-white/35 text-center" style={{ fontFamily: "var(--font-inter)" }}>
+        {node.sub}
+      </p>
+    </motion.div>
+  );
+}
+
+/* ── Input video card (left) ── */
+function InputCard({ inView }: { inView: boolean }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -40 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="flex flex-col gap-3"
+    >
+      <p className="text-[11px] font-bold tracking-widest uppercase text-white/30" style={{ fontFamily: "var(--font-syne)" }}>
+        Input
+      </p>
+
+      {/* Video slot — swap src="" with your actual video later */}
+      <div
+        className="relative w-full rounded-2xl overflow-hidden"
+        style={{
+          aspectRatio: "16/9",
+          background: "#111",
+          border: "1.5px solid rgba(255,255,255,0.08)",
+          minWidth: 220,
+        }}
+      >
+        <video
+          src="/vedio/Screen Recording 2026-04-16 120048.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* Floating format pills */}
+        <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5">
+          {["MP4", "MP3", "MOV", "MKV"].map((fmt) => (
+            <span
+              key={fmt}
+              className="px-2 py-0.5 rounded-md text-[9px] font-bold"
+              style={{ background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.1)" }}
+            >
+              {fmt}
+            </span>
+          ))}
         </div>
-      )
-    }
+      </div>
+
+      {/* Upload label */}
+      <div className="flex items-center gap-2 px-3 py-2 rounded-xl" style={{ background: "rgba(90,107,251,0.1)", border: "1px solid rgba(90,107,251,0.2)" }}>
+        <motion.div className="w-2 h-2 rounded-full bg-[#5A6BFB]" animate={{ opacity: [1, 0.3, 1] }} transition={{ repeat: Infinity, duration: 1.5 }} />
+        <span className="text-[12px] font-semibold text-[#818CF8]" style={{ fontFamily: "var(--font-inter)" }}>
+          1 upload · Processing instantly
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Output clips (right) ── */
+function OutputCards({ inView }: { inView: boolean }) {
+  const clips = [
+    { label: "Clip 1", platform: "Reels",  color: "#E1306C", src: "/vedio/clip_00_polished.mp4" },
+    { label: "Clip 2", platform: "Shorts", color: "#FF0000", src: "/vedio/clip_02_polished.mp4" },
+    { label: "Clip 3", platform: "TikTok", color: "#69C9D0", src: "/vedio/clip_02_polished (1).mp4" },
   ];
 
   return (
-    <section id="how-it-works" className="bg-[#F4F4F5] py-24 px-6 md:px-12 w-full font-sans">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16 max-w-2xl mx-auto">
-          <p className="text-[#5A6BFB] font-bold text-sm tracking-widest uppercase mb-4">How It Works</p>
-          <h2 className="text-[#1C1C1C] text-[40px] md:text-[56px] font-[900] leading-tight tracking-[-0.02em] mb-4" style={{ fontFamily: "var(--font-inter)" }}>
-            Raw to ready in 3 steps.
-          </h2>
-          <p className="text-[#3F3F46] text-xl font-medium">
-            The fastest path from footage to finished.
-          </p>
-        </div>
+    <motion.div
+      initial={{ opacity: 0, x: 40 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+      className="flex flex-col gap-3"
+    >
+      <p className="text-[11px] font-bold tracking-widest uppercase text-white/30" style={{ fontFamily: "var(--font-syne)" }}>
+        Output
+      </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {steps.map((item, i) => (
+      {/* 3 portrait clip cards */}
+      <div className="flex gap-3 items-end">
+        {clips.map((clip, i) => (
+          <motion.div
+            key={clip.label}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.55, delay: 0.5 + i * 0.12 }}
+            className="relative rounded-xl overflow-hidden flex-1"
+            style={{
+              aspectRatio: "9/16",
+              background: "#111",
+              border: "1.5px solid rgba(255,255,255,0.08)",
+              maxWidth: 90,
+              minWidth: 64,
+            }}
+          >
+            <video
+              src={clip.src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+            {/* Animated caption bar */}
             <motion.div
-              key={i}
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-[24px] shadow-[0_12px_40px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col border border-gray-100"
+              className="absolute bottom-0 left-0 right-0 px-1.5 py-2"
+              style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85), transparent)" }}
             >
-              {/* Illustration Top Half */}
-              <div className="w-full bg-[#FAFAFA] border-b border-gray-50 flex items-center justify-center p-6 min-h-[220px]">
-                {item.illustration}
+              <motion.div
+                className="h-1.5 rounded-full mb-1.5"
+                style={{ background: clip.color, width: "60%" }}
+                animate={{ width: ["40%", "80%", "55%", "70%"] }}
+                transition={{ repeat: Infinity, duration: 2.5, delay: i * 0.4 }}
+              />
+              <div className="h-1 rounded-full mb-1" style={{ background: "rgba(255,255,255,0.15)", width: "90%" }} />
+              <div className="h-1 rounded-full" style={{ background: "rgba(255,255,255,0.1)", width: "70%" }} />
+            </motion.div>
+
+            {/* Platform badge */}
+            <div
+              className="absolute top-2 left-1.5 px-1.5 py-0.5 rounded-md text-[8px] font-bold"
+              style={{ background: clip.color, color: "white" }}
+            >
+              {clip.platform}
+            </div>
+
+            {/* Progress bar */}
+            <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: "rgba(255,255,255,0.1)" }}>
+              <motion.div
+                className="h-full"
+                style={{ background: clip.color }}
+                animate={{ width: ["0%", "100%"] }}
+                transition={{ repeat: Infinity, duration: 3 + i * 0.5, delay: i * 0.3 }}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Output label */}
+      <div className="flex items-center gap-2 px-3 py-2 rounded-xl" style={{ background: "rgba(52,211,153,0.08)", border: "1px solid rgba(52,211,153,0.2)" }}>
+        <motion.div className="w-2 h-2 rounded-full bg-[#34D399]" animate={{ opacity: [1, 0.3, 1] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0.5 }} />
+        <span className="text-[12px] font-semibold text-[#34D399]" style={{ fontFamily: "var(--font-inter)" }}>
+          3 viral clips · Ready to post
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Main export ── */
+export function VeedHowItWorks() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section id="how-it-works" className="relative py-24 px-6 md:px-12 w-full overflow-hidden" style={{ background: "#080808" }}>
+
+      {/* Ambient glows */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[-5%] top-[20%] w-125 h-125 rounded-full opacity-20"
+          style={{ background: "radial-gradient(circle, rgba(90,107,251,0.3) 0%, transparent 65%)", filter: "blur(80px)" }} />
+        <div className="absolute right-[-5%] bottom-[10%] w-100 h-100 rounded-full opacity-15"
+          style={{ background: "radial-gradient(circle, rgba(217,70,239,0.3) 0%, transparent 65%)", filter: "blur(80px)" }} />
+      </div>
+
+      <div className="relative z-10 max-w-310 mx-auto">
+
+        {/* Header */}
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-14"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5"
+            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <span className="text-[11px] font-bold tracking-widest uppercase text-white/40" style={{ fontFamily: "var(--font-inter)" }}>
+              How It Works
+            </span>
+          </div>
+          <h2 className="text-white text-[36px] md:text-[52px] font-black leading-[1.05] tracking-[-0.02em] mb-3"
+            style={{ fontFamily: "var(--font-syne)" }}>
+            Upload your video.{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#818CF8] to-[#D946EF]">
+              Get viral clips.
+            </span>{" "}
+            Automatically.
+          </h2>
+          <p className="text-white/60 text-lg" style={{ fontFamily: "var(--font-inter)" }}>
+            One upload. Three viral clips. Zero editing.
+          </p>
+        </motion.div>
+
+        {/* ── Horizontal pipeline flow ── */}
+        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-4">
+
+          {/* LEFT — input video */}
+          <div className="w-full lg:w-55 shrink-0">
+            <InputCard inView={inView} />
+          </div>
+
+          {/* CENTER — animated pipeline */}
+          <div className="flex-1 w-full">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="rounded-2xl p-6 md:p-8"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+            >
+              {/* Desktop: horizontal nodes */}
+              <div className="hidden md:flex items-center gap-0">
+                {pipelineNodes.map((node, i) => (
+                  <div key={node.label} className="flex items-center flex-1 min-w-0">
+                    <div className="flex flex-col items-center shrink-0">
+                      <PipelineNode node={node} index={i} inView={inView} />
+                    </div>
+                    {i < pipelineNodes.length - 1 && (
+                      <div className="flex-1 mx-2 -mt-4.5">
+                        <FlowDots color={pipelineNodes[i + 1].color} />
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-              
-              {/* Text Bottom Half */}
-              <div className="p-8 lg:p-10 flex-1 bg-white">
-                <span className="text-[12px] font-bold tracking-widest text-[#111827] uppercase opacity-90 block mb-3">
-                  {item.step}
-                </span>
-                <h3 className="text-[26px] font-semibold text-[#1C1C1C] mb-4 tracking-[-0.01em] leading-tight">
-                  {item.title}
-                </h3>
-                <p className="text-[#4B5563] text-[16px] leading-[1.6]">
-                  {item.description}
-                </p>
+
+              {/* Mobile: vertical nodes */}
+              <div className="flex md:hidden flex-col gap-4">
+                {pipelineNodes.map((node, i) => (
+                  <div key={node.label} className="flex items-center gap-4">
+                    <motion.div
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={inView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.45, delay: 0.3 + i * 0.08 }}
+                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ background: `${node.color}18`, border: `1.5px solid ${node.color}50` }}
+                    >
+                      <node.Icon size={17} style={{ color: node.color }} strokeWidth={1.8} />
+                    </motion.div>
+                    <div>
+                      <p className="text-[13px] font-bold text-white/80" style={{ fontFamily: "var(--font-syne)" }}>{node.label}</p>
+                      <p className="text-[11px] text-white/35" style={{ fontFamily: "var(--font-inter)" }}>{node.sub}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
-          ))}
+          </div>
+
+          {/* RIGHT — output clips */}
+          <div className="w-full lg:w-auto shrink-0">
+            <OutputCards inView={inView} />
+          </div>
         </div>
+
+        {/* ── Stats bar ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10"
+        >
+          {[
+            { value: "1", label: "upload" },
+            { value: "3", label: "viral clips" },
+            { value: "0", label: "manual editing" },
+            { value: "~5 min", label: "to process" },
+          ].map((s) => (
+            <div
+              key={s.label}
+              className="rounded-2xl p-5 text-center"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+            >
+              <p className="text-[28px] font-black text-white leading-none mb-1" style={{ fontFamily: "var(--font-syne)" }}>
+                {s.value}
+              </p>
+              <p className="text-[11px] text-white/35 font-semibold uppercase tracking-wide" style={{ fontFamily: "var(--font-inter)" }}>
+                {s.label}
+              </p>
+            </div>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   );

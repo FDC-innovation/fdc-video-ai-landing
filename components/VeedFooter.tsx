@@ -85,7 +85,7 @@ export function VeedFooter() {
                 className="text-[12px] font-bold tracking-widest uppercase"
                 style={{ color: "#818CF8", fontFamily: "var(--font-syne)" }}
               >
-                Closed Beta · Limited Spots
+                Early Access · Limited Spots
               </span>
             </div>
             <h3
@@ -101,7 +101,7 @@ export function VeedFooter() {
               </span>
             </h3>
             <p className="text-[15px]" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter)" }}>
-              Join 2,400+ creators already on the waitlist.
+              Be among the first to experience AI-powered video creation.
             </p>
           </div>
 
@@ -142,17 +142,6 @@ export function VeedFooter() {
                 style={{ fontFamily: "var(--font-syne)" }}
               >
                 Chalchitra
-              </span>
-              <span
-                className="text-[10px] font-bold px-2.5 py-1 rounded-full"
-                style={{
-                  background: "rgba(90,107,251,0.12)",
-                  border: "1px solid rgba(90,107,251,0.25)",
-                  color: "#818CF8",
-                  fontFamily: "var(--font-syne)",
-                }}
-              >
-                BETA
               </span>
             </div>
 
