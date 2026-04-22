@@ -149,9 +149,9 @@ function InputCard({ inView }: { inView: boolean }) {
 /* ── Output clips (right) ── */
 function OutputCards({ inView }: { inView: boolean }) {
   const clips = [
-    { label: "Clip 1", platform: "Reels",  color: "#E1306C", src: "/vedio/clip_00_polished.mp4" },
-    { label: "Clip 2", platform: "Shorts", color: "#FF0000", src: "/vedio/clip_02_polished.mp4" },
-    { label: "Clip 3", platform: "TikTok", color: "#69C9D0", src: "/vedio/clip_02_polished (1).mp4" },
+    { label: "Clip 1", platform: "Reels",  color: "#E1306C", src: "/vedio/clip1.mp4" },
+    { label: "Clip 2", platform: "Shorts", color: "#FF0000", src: "/vedio/clip2.mp4" },
+    { label: "Clip 3", platform: "TikTok", color: "#69C9D0", src: "/vedio/clip3.mp4" },
   ];
 
   return (
@@ -510,9 +510,9 @@ export function VeedHowItWorks() {
               {/* 3 Phone frames */}
               <div className="flex gap-3 justify-center items-end">
                 {[
-                  { src: "/vedio/clip_00_polished.mp4", platform: "Reels",  color: "#E1306C" },
-                  { src: "/vedio/clip_02_polished.mp4", platform: "Shorts", color: "#FF0000" },
-                  { src: "/vedio/clip_02_polished (1).mp4", platform: "TikTok", color: "#69C9D0" },
+                  { src: "/vedio/clip1.mp4", platform: "Reels",  color: "#E1306C" },
+                  { src: "/vedio/clip2.mp4", platform: "Shorts", color: "#FF0000" },
+                  { src: "/vedio/clip3.mp4", platform: "TikTok", color: "#69C9D0" },
                 ].map((clip, i) => (
                   <motion.div
                     key={clip.platform}

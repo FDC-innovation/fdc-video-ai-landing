@@ -90,7 +90,7 @@ function CreatorsVisual() {
       <div className="relative flex-1 cursor-pointer" onClick={togglePlay}>
         <video
           ref={videoRef}
-          src="/vedio/clip_00_polished.mp4"
+          src="/vedio/clip1.mp4"
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
